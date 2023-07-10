@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TheAudioDBApp</string>
+    <string name="rankings">Classements</string>
+    <string name="search">Recherche</string>
 </resources>
