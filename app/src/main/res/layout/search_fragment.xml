@@ -62,12 +62,19 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/tvTitleTextStyle"
                     android:text="@string/artists"
                     android:paddingVertical="20dp"
                     android:background="@drawable/border_bottom"/>
+
+                <com.example.theaudiodbapp.components.ResourceLink
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:image="@drawable/ic_launcher_background"
+                    app:title="AI Green"
+                    app:linkType="artist"/>
             </LinearLayout>
 
             <LinearLayout
@@ -79,12 +86,20 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/tvTitleTextStyle"
                     android:text="@string/albums"
                     android:paddingVertical="20dp"
                     android:background="@drawable/border_bottom"/>
+
+                <com.example.theaudiodbapp.components.ResourceLink
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:image="@drawable/ic_launcher_background"
+                    app:title="Full of fire"
+                    app:subtitle="AI Green"
+                    app:linkType="album"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

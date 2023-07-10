@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import androidx.core.view.children
 import com.example.theaudiodbapp.R
 
-class CustomInput(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
+class CustomInput(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
 
     private val et: EditText
     private val btnCancel: ImageView
