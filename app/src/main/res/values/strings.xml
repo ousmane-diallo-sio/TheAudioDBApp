@@ -2,4 +2,7 @@
     <string name="app_name">TheAudioDBApp</string>
     <string name="rankings">Classements</string>
     <string name="search">Recherche</string>
+    <string name="search_cta">Rechercher</string>
+    <string name="artists">Artistes</string>
+    <string name="albums">Albums</string>
 </resources>
