@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="crayola">#FF1BB46B</color>
+    <color name="anti_flash_white">#FFF3F3F3</color>
+    <color name="philippine_gray">#FF8D8D8D</color>
 </resources>
