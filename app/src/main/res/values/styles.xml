@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="tvNormalTextStyle">
+        <item name="android:textSize">15sp</item>
+        <item name="color">@color/black</item>
+    </style>
+    <style name="tvPageTitleTextStyle">
+        <item name="android:textSize">35sp</item>
+        <item name="color">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="tvTitleTextStyle">
+        <item name="android:textSize">23sp</item>
+        <item name="color">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="tvSubtitleTextStyle">
+        <item name="android:textSize">13sp</item>
+        <item name="color">@color/philippine_gray</item>
+    </style>
+</resources>
