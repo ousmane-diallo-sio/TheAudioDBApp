@@ -126,9 +126,6 @@ class SearchFragment : Fragment() {
                 }
             }
         }
-
-        // How to update list :
-        // searchAdapter.updateData(listOf())
     }
 
     override fun onDestroyView() {
