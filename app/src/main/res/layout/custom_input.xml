@@ -28,6 +28,8 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="7dp"
             android:background="@android:color/transparent"
+            android:maxLines="1"
+            android:inputType="text"
             style="@style/tvNormalTextStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/ivSearchCustomInput"

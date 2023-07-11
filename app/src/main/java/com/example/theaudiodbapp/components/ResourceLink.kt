@@ -22,7 +22,7 @@ class ResourceLink(context: Context, private val attrs: AttributeSet?): LinearLa
                 }
                 LinkType.ALBUM -> {
                     tvSubtitle.visibility = VISIBLE
-                    ivOverviewContainer.radius = Helpers.convertDpToPx(10)
+                    ivOverviewContainer.radius = Helpers.convertDpToPx(9)
                 }
             }
 

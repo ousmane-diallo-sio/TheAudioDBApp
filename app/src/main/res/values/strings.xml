@@ -5,4 +5,5 @@
     <string name="search_cta">Rechercher</string>
     <string name="artists">Artistes</string>
     <string name="albums">Albums</string>
+    <string name="most_popular_titles">Titres les plus appréciés</string>
 </resources>
