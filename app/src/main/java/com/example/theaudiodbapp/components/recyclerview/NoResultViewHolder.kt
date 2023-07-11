@@ -1,4 +1,4 @@
-package com.example.theaudiodbapp.ui.home.search.components
+package com.example.theaudiodbapp.components.recyclerview
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

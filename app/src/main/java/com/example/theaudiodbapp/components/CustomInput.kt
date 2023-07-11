@@ -31,7 +31,10 @@ class CustomInput(context: Context, attrs: AttributeSet?) : LinearLayout(context
     }
 
     private fun setListeners() {
-        btnCancel.setOnClickListener { et.text.clear() }
+        btnCancel.setOnClickListener {
+            et.text.clear()
+            onTextChange?.onTextChanged(et.text, 0, 0, 0)
+        }
     }
 
 }

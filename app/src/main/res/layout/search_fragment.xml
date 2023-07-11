@@ -45,6 +45,7 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/vSeparatorSearchFragment"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -52,83 +53,33 @@
         app:layout_constraintTop_toBottomOf="@id/llSearchSearchFragment"
         android:background="@color/platinum" />
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvArtistsSearchFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEndSearchFragment"
         app:layout_constraintStart_toStartOf="@id/guidelineStartSearchFragment"
-        app:layout_constraintTop_toBottomOf="@id/llSearchSearchFragment">
+        app:layout_constraintEnd_toEndOf="@id/guidelineEndSearchFragment"
+        app:layout_constraintTop_toBottomOf="@id/vSeparatorSearchFragment"
+        android:paddingBottom="?attr/actionBarSize"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guidelineStartSearchFragment"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEndSearchFragment"
+        app:layout_constraintTop_toBottomOf="@id/vSeparatorSearchFragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/llArtistsSearchFragment"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+        <include
+            android:id="@+id/lytNoResultSearchFragment"
+            android:visibility="gone"
+            layout="@layout/no_result_placeholder"/>
 
-                <TextView
-                    style="@style/tvTitleTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="20dp"
-                    android:text="@string/artists" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="15dp"
-                    android:background="@color/platinum" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvArtistsSearchFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <include
-                    android:id="@+id/lytNoResultSearchFragment"
-                    android:visibility="gone"
-                    layout="@layout/no_result_placeholder"/>
-                <include
-                    android:id="@+id/lytSearchSearchFragment"
-                    android:visibility="gone"
-                    layout="@layout/search_placeholder"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/llArtistsSearchFragment">
-
-                <TextView
-                    style="@style/tvTitleTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="20dp"
-                    android:text="@string/albums" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="15dp"
-                    android:background="@color/platinum" />
-
-                <com.example.theaudiodbapp.components.ResourceLink
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:image="@drawable/ic_launcher_background"
-                    app:linkType="album"
-                    app:subtitle="AI Green"
-                    app:title="Full of fire" />
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        <include
+            android:id="@+id/lytSearchSearchFragment"
+            android:visibility="gone"
+            layout="@layout/search_placeholder"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

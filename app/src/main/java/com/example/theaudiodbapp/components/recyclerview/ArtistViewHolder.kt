@@ -1,4 +1,4 @@
-package com.example.theaudiodbapp.ui.home.search.components
+package com.example.theaudiodbapp.components.recyclerview
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,5 +17,6 @@ class ArtistViewHolder(itemView: ResourceLink) : RecyclerView.ViewHolder(itemVie
             .load(artist.strArtistThumb)
             .placeholder(R.drawable.placeholder_artiste)
             .into(itemView.ivOverview)
+        // TODO : Add click listener
     }
 }

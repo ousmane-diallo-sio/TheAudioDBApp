@@ -1,6 +1,8 @@
-package com.example.theaudiodbapp.ui.home.search.components
+package com.example.theaudiodbapp.components.recyclerview
 
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.theaudiodbapp.R
 import com.example.theaudiodbapp.components.LinkType
 import com.example.theaudiodbapp.components.ResourceLink
 import com.example.theaudiodbapp.model.Album
@@ -12,6 +14,10 @@ class AlbumViewHolder(itemView: ResourceLink) : RecyclerView.ViewHolder(itemView
         itemView.linkType = LinkType.ALBUM
         itemView.tvTitle.text = album.strAlbum
         itemView.tvSubtitle.text = album.strArtist
-        // TODO : Setup image and onClickListener
+        Glide.with(itemView.context)
+            .load(album.strAlbumThumb)
+            .placeholder(R.drawable.placeholder_artiste)
+            .into(itemView.ivOverview)
+        // TODO : Add click listener
     }
 }

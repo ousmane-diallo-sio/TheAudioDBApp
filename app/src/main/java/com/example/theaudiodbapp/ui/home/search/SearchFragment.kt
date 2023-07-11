@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.theaudiodbapp.R
 import com.example.theaudiodbapp.components.CustomInput
+import com.example.theaudiodbapp.components.recyclerview.HeaderType
+import com.example.theaudiodbapp.components.recyclerview.RecyclerViewHeader
 import com.example.theaudiodbapp.databinding.SearchFragmentBinding
-import com.example.theaudiodbapp.model.Album
-import com.example.theaudiodbapp.ui.home.search.components.SearchAdapter
+import com.example.theaudiodbapp.components.recyclerview.SearchAdapter
+import com.example.theaudiodbapp.utils.Helpers
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
@@ -43,6 +45,18 @@ class SearchFragment : Fragment() {
 
         val searchAdapter = SearchAdapter(mutableListOf())
         rvArtists.layoutManager = LinearLayoutManager(requireContext())
+        rvArtists.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: android.graphics.Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                super.getItemOffsets(outRect, view, parent, state)
+                outRect.top = Helpers.convertDpToPx(5).toInt()
+                outRect.bottom = Helpers.convertDpToPx(5).toInt()
+            }
+        })
         rvArtists.adapter = searchAdapter
 
         ciSearch.onTextChange = object : TextWatcher {
@@ -50,6 +64,7 @@ class SearchFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 viewModel.resetArtists()
+                viewModel.resetAlbums()
                 if (!s.isNullOrEmpty()) {
                     viewModel.getArtists(s.toString())
                     viewModel.getAlbums(s.toString())
@@ -62,8 +77,19 @@ class SearchFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.artistsFlow.collect { artists ->
                 artists.artists?.let { artists ->
+
+                    val artistHeader = if (artists.isNotEmpty()) {
+                        RecyclerViewHeader(requireContext(), HeaderType.ARTISTS)
+                    } else null
+
+                    val albumHeader = if ((viewModel.albumsFlow.value.album?.size ?: 0) > 0) {
+                        RecyclerViewHeader(requireContext(), HeaderType.ALBUMS)
+                    } else null
+
                     searchAdapter.updateData(
-                        artists +
+                        listOf(artistHeader) +
+                                artists +
+                                listOf(albumHeader) +
                                 viewModel.albumsFlow.value.album.orEmpty()
                     )
                 }
@@ -84,8 +110,17 @@ class SearchFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.albumsFlow.collect { albums ->
                 albums.album?.let { album ->
+                    val artistHeader = if ((viewModel.artistsFlow.value.artists?.size ?: 0) > 0) {
+                        RecyclerViewHeader(requireContext(), HeaderType.ARTISTS)
+                    } else null
+
+                    val albumHeader = if (album.isNotEmpty()) {
+                        RecyclerViewHeader(requireContext(), HeaderType.ALBUMS)
+                    } else null
                     searchAdapter.updateData(
-                        viewModel.artistsFlow.value.artists.orEmpty() +
+                        listOf(artistHeader) +
+                                viewModel.artistsFlow.value.artists.orEmpty() +
+                                listOf(albumHeader) +
                                 album
                     )
                 }
