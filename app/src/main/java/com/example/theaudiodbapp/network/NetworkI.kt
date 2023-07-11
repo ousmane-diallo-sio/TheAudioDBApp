@@ -1,5 +1,6 @@
 package com.example.theaudiodbapp.network
 
+import com.example.theaudiodbapp.model.AlbumsList
 import com.example.theaudiodbapp.model.ArtistsList
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
@@ -15,5 +16,5 @@ interface NetworkArtistI {
 interface NetworkAlbumI {
 
     @GET("api/v1/json/523532/searchalbum.php/")
-    fun getAlbumsAsync(@Query("s") search: String): Deferred<ArtistsList>
+    fun getAlbumsAsync(@Query("s") search: String): Deferred<AlbumsList>
 }

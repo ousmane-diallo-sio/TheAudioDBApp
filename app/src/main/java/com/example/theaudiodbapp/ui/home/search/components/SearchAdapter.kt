@@ -61,7 +61,7 @@ class SearchAdapter(private val items: MutableList<Any>) :
         return when (items[position]) {
             is Artist -> VIEW_TYPE_ARTIST
             is Album -> VIEW_TYPE_ALBUM
-            else -> throw IllegalArgumentException("Invalid view type")
+            else -> throw IllegalArgumentException("Invalid view type, cannot find type for ${items[position]}")
         }
     }
 

@@ -9,14 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.theaudiodbapp.R
 import com.example.theaudiodbapp.components.CustomInput
 import com.example.theaudiodbapp.databinding.SearchFragmentBinding
+import com.example.theaudiodbapp.model.Album
 import com.example.theaudiodbapp.ui.home.search.components.SearchAdapter
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
@@ -39,8 +38,8 @@ class SearchFragment : Fragment() {
 
         val ciSearch = view.findViewById<CustomInput>(R.id.ciSearchSearchFragment)
         val rvArtists = view.findViewById<RecyclerView>(R.id.rvArtistsSearchFragment)
-        val lytNoResult = view.findViewById<View>(R.id.lytNoResultSearchFragment)
-        val lytSearch = view.findViewById<View>(R.id.lytSearchSearchFragment)
+        val lytNoResultArtists = view.findViewById<View>(R.id.lytNoResultSearchFragment)
+        val lytSearchArtistsPlaceholder = view.findViewById<View>(R.id.lytSearchSearchFragment)
 
         val searchAdapter = SearchAdapter(mutableListOf())
         rvArtists.layoutManager = LinearLayoutManager(requireContext())
@@ -53,6 +52,7 @@ class SearchFragment : Fragment() {
                 viewModel.resetArtists()
                 if (!s.isNullOrEmpty()) {
                     viewModel.getArtists(s.toString())
+                    viewModel.getAlbums(s.toString())
                 }
             }
 
@@ -61,19 +61,34 @@ class SearchFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.artistsFlow.collect { artists ->
-                artists.artists?.let { searchAdapter.updateData(it) }
+                artists.artists?.let { artists ->
+                    searchAdapter.updateData(
+                        artists +
+                                viewModel.albumsFlow.value.album.orEmpty()
+                    )
+                }
                 if (artists.artists.isNullOrEmpty()) {
                     if (ciSearch.et.text.isNotEmpty()) {
-                        lytNoResult.visibility = View.VISIBLE
-                        lytSearch.visibility = View.GONE
+                        lytNoResultArtists.visibility = View.VISIBLE
+                        lytSearchArtistsPlaceholder.visibility = View.GONE
                     } else {
-                        lytNoResult.visibility = View.GONE
-                        lytSearch.visibility = View.VISIBLE
+                        lytNoResultArtists.visibility = View.GONE
+                        lytSearchArtistsPlaceholder.visibility = View.VISIBLE
                     }
                     return@collect
                 }
-                lytNoResult.visibility = View.GONE
-                lytSearch.visibility = View.GONE
+                lytNoResultArtists.visibility = View.GONE
+                lytSearchArtistsPlaceholder.visibility = View.GONE
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.albumsFlow.collect { albums ->
+                albums.album?.let { album ->
+                    searchAdapter.updateData(
+                        viewModel.artistsFlow.value.artists.orEmpty() +
+                                album
+                    )
+                }
             }
         }
 

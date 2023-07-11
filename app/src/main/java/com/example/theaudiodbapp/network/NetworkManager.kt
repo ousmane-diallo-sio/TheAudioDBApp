@@ -1,6 +1,7 @@
 package com.example.theaudiodbapp.network
 
 import android.util.Log
+import com.example.theaudiodbapp.model.AlbumsList
 import com.example.theaudiodbapp.model.ArtistsList
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -36,6 +37,10 @@ object NetworkManager {
 
     fun getArtistsAsync(search: String): Deferred<ArtistsList> {
         return artistsApi.getArtistsAsync(search)
+    }
+
+    fun getAlbumsAsync(search: String): Deferred<AlbumsList> {
+        return albumsApi.getAlbumsAsync(search)
     }
 
 }
