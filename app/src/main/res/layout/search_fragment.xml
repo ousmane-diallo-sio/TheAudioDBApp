@@ -85,12 +85,18 @@
                     android:layout_marginVertical="15dp"
                     android:background="@color/platinum" />
 
-                <com.example.theaudiodbapp.components.ResourceLink
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvArtistsSearchFragment"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:image="@drawable/ic_launcher_background"
-                    app:linkType="artist"
-                    app:title="AI Green" />
+                    android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/lytNoResultSearchFragment"
+                    android:visibility="gone"
+                    layout="@layout/no_result_placeholder"/>
+                <include
+                    android:id="@+id/lytSearchSearchFragment"
+                    android:visibility="gone"
+                    layout="@layout/search_placeholder"/>
             </LinearLayout>
 
             <LinearLayout

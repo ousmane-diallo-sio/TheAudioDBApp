@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav.xml"
-    app:startDestination="@id/rankingFragment">
+    app:startDestination="@id/searchFragment">
+    <!-- TODO replace searchFragment by Ranking Fragment -->
 
     <fragment
         android:id="@+id/rankingFragment"
