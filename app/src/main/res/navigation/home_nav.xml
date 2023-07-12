@@ -20,20 +20,23 @@
 
         <action
             android:id="@+id/action_searchFragment_to_artistFragment"
-            app:destination="@id/artistFragment" />
+            app:destination="@id/artistFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
 
     <fragment
         android:id="@+id/artistFragment"
         android:name="com.example.theaudiodbapp.ui.details.artist.ArtistFragment"
-        android:label="ArtistFragment" >
+        android:label="ArtistFragment">
         <argument
             android:name="artist"
-            app:argType="com.example.theaudiodbapp.model.Artist"
-            />
+            app:argType="com.example.theaudiodbapp.model.Artist" />
         <action
             android:id="@+id/action_artistFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
     </fragment>
 
 </navigation>

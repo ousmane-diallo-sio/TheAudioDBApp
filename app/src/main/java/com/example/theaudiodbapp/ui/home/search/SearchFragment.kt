@@ -21,6 +21,7 @@ import com.example.theaudiodbapp.components.recyclerview.RecyclerViewHeader
 import com.example.theaudiodbapp.databinding.SearchFragmentBinding
 import com.example.theaudiodbapp.components.recyclerview.SearchAdapter
 import com.example.theaudiodbapp.utils.Helpers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
@@ -41,8 +42,8 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val ciSearch = view.findViewById<CustomInput>(R.id.ciSearchSearchFragment)
-        val rvArtists = view.findViewById<RecyclerView>(R.id.rvArtistsSearchFragment)
+        val ciSearch = binding.ciSearchSearchFragment
+        val rvArtists = binding.rvArtistsSearchFragment
         val lytNoResultArtists = view.findViewById<View>(R.id.lytNoResultSearchFragment)
         val lytSearchArtistsPlaceholder = view.findViewById<View>(R.id.lytSearchSearchFragment)
 
@@ -83,6 +84,18 @@ class SearchFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {}
+        }
+
+        lifecycleScope.launch {
+            viewModel.loadingFlow.collect {
+                if (it) {
+                    binding.pbSearchFragment.visibility = View.VISIBLE
+                    lytNoResultArtists.visibility = View.GONE
+                    lytSearchArtistsPlaceholder.visibility = View.GONE
+                } else {
+                    binding.pbSearchFragment.visibility = View.GONE
+                }
+            }
         }
 
         lifecycleScope.launch {

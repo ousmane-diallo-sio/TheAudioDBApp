@@ -11,28 +11,34 @@ import kotlinx.coroutines.launch
 
 class SearchViewModel: ViewModel() {
 
+    val loadingFlow = MutableStateFlow(false)
+
     val artistsFlow = MutableStateFlow(ArtistsList(emptyList()))
     val albumsFlow = MutableStateFlow(AlbumsList(emptyList()))
 
     fun getArtists(search: String) {
         viewModelScope.launch {
+            loadingFlow.emit(true)
             try {
                 val artists = NetworkManager.getArtistsAsync(search).await()
                 artistsFlow.emit(artists)
             } catch (e: Exception) {
                 Log.e("SearchViewModel", "getArtists: $e")
             }
+            loadingFlow.emit(false)
         }
     }
 
     fun getAlbums(search: String) {
         viewModelScope.launch {
+            loadingFlow.emit(true)
             try {
                 val albums = NetworkManager.getAlbumsAsync(search).await()
                 albumsFlow.emit(albums)
             } catch (e: Exception) {
                 Log.e("SearchViewModel", "getArtists: $e")
             }
+            loadingFlow.emit(false)
         }
     }
 

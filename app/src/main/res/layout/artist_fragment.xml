@@ -81,7 +81,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:textColor="@color/philippine_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/guidelineStartHeader"
                     tools:text="Khalid" />
@@ -93,11 +92,21 @@
             style="@style/tvSubtitleMdTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="@id/guidelineEndBody"
             app:layout_constraintStart_toStartOf="@id/guidelineStartBody"
             app:layout_constraintTop_toBottomOf="@id/flHeaderArtistFragment"
             tools:text="Khalid, is an American singer and songwriter. He is signed to Right Hand Music Group and RCA Records. His debut single, 'Location', was released in July 2016…" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvArtistFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/guidelineStartBody"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEndBody"
+            app:layout_constraintTop_toBottomOf="@id/tvDescArtistFragment"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="30dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
