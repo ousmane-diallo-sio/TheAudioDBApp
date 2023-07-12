@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStartBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="10dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEndBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="10dp" />
+
+        <FrameLayout
+            android:id="@+id/flHeaderArtistFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/ic_launcher_background" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bottom_gradient" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineStartHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="5dp" />
+
+                <ImageView
+                    android:id="@+id/btnBackArtistFragment"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/baseline_chevron_left_24"
+                    app:layout_constraintLeft_toRightOf="@id/guidelineStartHeader"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tvArtistNameArtistFragment"
+                    style="@style/tvPageTitleTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toTopOf="@id/tvLocationArtistFragment"
+                    app:layout_constraintStart_toEndOf="@id/guidelineStartHeader"
+                    tools:text="Khalid" />
+
+                <TextView
+                    android:id="@+id/tvLocationArtistFragment"
+                    style="@style/tvSubtitleTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guidelineStartHeader"
+                    tools:text="Khalid" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvDescArtistFragment"
+            style="@style/tvSubtitleMdTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEndBody"
+            app:layout_constraintStart_toStartOf="@id/guidelineStartBody"
+            app:layout_constraintTop_toBottomOf="@id/flHeaderArtistFragment"
+            tools:text="Khalid, is an American singer and songwriter. He is signed to Right Hand Music Group and RCA Records. His debut single, 'Location', was released in July 2016…" />
+
+        <LinearLayout
+            android:id="@+id/llAlbumsArtistFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEndBody"
+            app:layout_constraintStart_toStartOf="@id/guidelineStartBody"
+            app:layout_constraintTop_toBottomOf="@id/tvDescArtistFragment">
+
+            <TextView
+                style="@style/tvTitleTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Albums (12)" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="5dp"
+                android:background="@color/platinum" />
+
+            <com.example.theaudiodbapp.components.ResourceLink
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:image="@drawable/ic_launcher_background"
+                app:linkType="album"
+                app:subtitle="2020"
+                app:title="After Hours" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPopularTitlesArtistFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEndBody"
+            app:layout_constraintStart_toStartOf="@id/guidelineStartBody"
+            app:layout_constraintTop_toBottomOf="@id/llAlbumsArtistFragment">
+
+            <TextView
+                style="@style/tvTitleTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/most_popular_titles" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="5dp"
+                android:background="@color/platinum" />
+
+            <com.example.theaudiodbapp.components.TitleRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:indexRow="1"
+                app:titleRow="Walk on Water feat. Beyoncé" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

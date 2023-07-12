@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:background="@color/anti_flash_white"
-    app:cardCornerRadius="6dp">
+    android:backgroundTint="@color/anti_flash_white"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,8 +15,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvIvResourceLink"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             app:cardCornerRadius="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -29,19 +30,21 @@
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:gravity="center_vertical"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/cvIvResourceLink"
+            app:layout_constraintRight_toLeftOf="@id/ivCtaResourceLink"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tvTitleResourceLink"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:textStyle="bold"
                 tools:text="AI Green" />
 
@@ -55,6 +58,7 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/ivCtaResourceLink"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/baseline_chevron_right_24"

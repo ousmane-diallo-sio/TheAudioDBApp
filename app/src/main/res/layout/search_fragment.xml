@@ -1,107 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.home.search.SearchFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStartSearchFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="15dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEndSearchFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="15dp" />
+
     <LinearLayout
         android:id="@+id/llSearchSearchFragment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/border_bottom"
+        app:layout_constraintStart_toStartOf="@id/guidelineStartSearchFragment"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEndSearchFragment"
         android:orientation="vertical"
-        android:paddingVertical="15dp">
+        android:paddingVertical="15dp"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            style="@style/tvPageTitleTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/tvPageTitleTextStyle"
             android:text="@string/search_cta" />
 
         <com.example.theaudiodbapp.components.CustomInput
             android:id="@+id/ciSearchSearchFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"/>
+            android:layout_marginVertical="5dp" />
     </LinearLayout>
 
-    <ScrollView
+    <View
+        android:id="@+id/vSeparatorSearchFragment"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llSearchSearchFragment"
+        android:background="@color/platinum" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvArtistsSearchFragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guidelineStartSearchFragment"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEndSearchFragment"
+        app:layout_constraintTop_toBottomOf="@id/vSeparatorSearchFragment"
+        android:paddingBottom="?attr/actionBarSize"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/llSearchSearchFragment">
+        app:layout_constraintStart_toStartOf="@id/guidelineStartSearchFragment"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEndSearchFragment"
+        app:layout_constraintTop_toBottomOf="@id/vSeparatorSearchFragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <include
+            android:id="@+id/lytNoResultSearchFragment"
+            android:visibility="gone"
+            layout="@layout/no_result_placeholder"/>
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guidelineStartSearchFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="15dp" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guidelineEndSearchFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="15dp" />
-
-            <LinearLayout
-                android:id="@+id/llArtistsSearchFragment"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guidelineStartSearchFragment"
-                app:layout_constraintEnd_toEndOf="@id/guidelineEndSearchFragment"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/tvTitleTextStyle"
-                    android:text="@string/artists"
-                    android:paddingVertical="20dp"
-                    android:background="@drawable/border_bottom"/>
-
-                <com.example.theaudiodbapp.components.ResourceLink
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:image="@drawable/ic_launcher_background"
-                    app:title="AI Green"
-                    app:linkType="artist"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/llArtistsSearchFragment"
-                app:layout_constraintStart_toStartOf="@id/guidelineStartSearchFragment"
-                app:layout_constraintEnd_toEndOf="@id/guidelineEndSearchFragment"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/tvTitleTextStyle"
-                    android:text="@string/albums"
-                    android:paddingVertical="20dp"
-                    android:background="@drawable/border_bottom"/>
-
-                <com.example.theaudiodbapp.components.ResourceLink
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:image="@drawable/ic_launcher_background"
-                    app:title="Full of fire"
-                    app:subtitle="AI Green"
-                    app:linkType="album"/>
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        <include
+            android:id="@+id/lytSearchSearchFragment"
+            android:visibility="gone"
+            layout="@layout/search_placeholder"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
