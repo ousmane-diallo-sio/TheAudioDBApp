@@ -47,8 +47,11 @@ class ArtistFragment : Fragment() {
         val tvLocationAndType = view.findViewById<TextView>(R.id.tvLocationAndTypeArtistFragment)
         val tvDesc = view.findViewById<TextView>(R.id.tvDescArtistFragment)
 
+        val headerImg = args.artist.strArtistFanart2 ?: args.artist.strArtistFanart
+        ?: args.artist.strArtistWideThumb ?: args.artist.strArtistThumb
+
         Glide.with(requireContext())
-            .load(args.artist.strArtistWideThumb ?: args.artist.strArtistFanart)
+            .load(headerImg)
             .placeholder(R.drawable.placeholder_artiste)
             .into(ivHeader)
         tvArtistName.text = args.artist.strArtist

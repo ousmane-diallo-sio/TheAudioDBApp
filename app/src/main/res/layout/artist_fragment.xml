@@ -27,7 +27,7 @@
             android:id="@+id/flHeaderArtistFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintDimensionRatio="H,1.15:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_begin="5dp" />
+                    app:layout_constraintGuide_begin="15dp" />
 
                 <ImageView
                     android:id="@+id/btnBackArtistFragment"
@@ -61,7 +61,7 @@
                     android:layout_height="45dp"
                     android:layout_marginTop="30dp"
                     android:src="@drawable/baseline_chevron_left_24"
-                    app:layout_constraintLeft_toRightOf="@id/guidelineStartHeader"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/white" />
 
@@ -80,9 +80,8 @@
                     style="@style/tvSubtitleTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
                     android:layout_marginBottom="20dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/philippine_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/guidelineStartHeader"
                     tools:text="Khalid" />
