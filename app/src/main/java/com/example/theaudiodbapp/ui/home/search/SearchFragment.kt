@@ -7,6 +7,8 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -155,16 +157,26 @@ class SearchFragment : Fragment() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
+        try {
+            val animation = AnimationUtils.loadAnimation(requireContext(), nextAnim)
+            if (enter) {
+                animation?.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationStart(animation: Animation?) {}
 
+                    override fun onAnimationEnd(animation: Animation?) {
+                        args.search?.let {
+                            binding.ciSearchSearchFragment.et.setText(it)
+                            binding.ciSearchSearchFragment.onTextChange?.onTextChanged(it, 0, 0, 0)
+                        }
+                    }
 
-        GlobalScope.launch {
-            delay(180)
-            args.search?.let {
-                binding.ciSearchSearchFragment.et.setText(it)
-                binding.ciSearchSearchFragment.onTextChange?.onTextChanged(it, 0, 0, 0)
+                    override fun onAnimationRepeat(animation: Animation?) {}
+                })
             }
+            return animation
+        } catch (e: Exception) {
+            return super.onCreateAnimation(transit, enter, nextAnim)
         }
     }
 
