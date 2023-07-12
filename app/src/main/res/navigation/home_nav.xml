@@ -17,12 +17,17 @@
         android:name="com.example.theaudiodbapp.ui.home.search.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/search_fragment">
+        <argument
+            android:name="search"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
 
         <action
             android:id="@+id/action_searchFragment_to_artistFragment"
             app:destination="@id/artistFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
 
     <fragment

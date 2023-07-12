@@ -59,7 +59,11 @@ class ArtistFragment : Fragment() {
         tvDesc.text = args.artist.strBiographyEN
 
         btnBack.setOnClickListener {
-            navigationController.navigate(ArtistFragmentDirections.actionArtistFragmentToSearchFragment())
+            navigationController.navigate(
+                ArtistFragmentDirections.actionArtistFragmentToSearchFragment(
+                    args.artist.strArtist
+                )
+            )
         }
     }
 

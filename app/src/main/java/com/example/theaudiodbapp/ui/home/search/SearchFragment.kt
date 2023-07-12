@@ -1,34 +1,37 @@
 package com.example.theaudiodbapp.ui.home.search
 
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.theaudiodbapp.R
-import com.example.theaudiodbapp.components.CustomInput
 import com.example.theaudiodbapp.components.recyclerview.HeaderType
 import com.example.theaudiodbapp.components.recyclerview.RecyclerViewHeader
 import com.example.theaudiodbapp.databinding.SearchFragmentBinding
 import com.example.theaudiodbapp.components.recyclerview.SearchAdapter
+import com.example.theaudiodbapp.ui.details.artist.ArtistFragmentArgs
 import com.example.theaudiodbapp.utils.Helpers
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.Timer
 
 class SearchFragment : Fragment() {
 
     private var _binding: SearchFragmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: SearchViewModel by viewModels()
+    private val args: SearchFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -148,6 +151,19 @@ class SearchFragment : Fragment() {
                                 album
                     )
                 }
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+
+        GlobalScope.launch {
+            delay(180)
+            args.search?.let {
+                binding.ciSearchSearchFragment.et.setText(it)
+                binding.ciSearchSearchFragment.onTextChange?.onTextChanged(it, 0, 0, 0)
             }
         }
     }
