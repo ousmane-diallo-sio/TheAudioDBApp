@@ -3,12 +3,15 @@ package com.example.theaudiodbapp.ui.home.search
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.theaudiodbapp.R
@@ -30,7 +33,7 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = SearchFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,7 +46,15 @@ class SearchFragment : Fragment() {
         val lytNoResultArtists = view.findViewById<View>(R.id.lytNoResultSearchFragment)
         val lytSearchArtistsPlaceholder = view.findViewById<View>(R.id.lytSearchSearchFragment)
 
-        val searchAdapter = SearchAdapter(mutableListOf())
+        val navController = findNavController()
+
+        val searchAdapter = SearchAdapter(
+            mutableListOf(),
+            { item ->
+                navController.navigate(SearchFragmentDirections.actionSearchFragmentToArtistFragment(item))
+            },
+            {  }
+        )
         rvArtists.layoutManager = LinearLayoutManager(requireContext())
         rvArtists.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(

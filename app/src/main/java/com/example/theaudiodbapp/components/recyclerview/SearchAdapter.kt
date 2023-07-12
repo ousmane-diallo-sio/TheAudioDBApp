@@ -1,13 +1,19 @@
 package com.example.theaudiodbapp.components.recyclerview
 
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.theaudiodbapp.R
 import com.example.theaudiodbapp.components.ResourceLink
 import com.example.theaudiodbapp.model.Album
 import com.example.theaudiodbapp.model.Artist
 
-class SearchAdapter(private val items: MutableList<Any>) :
+class SearchAdapter(
+    private val items: MutableList<Any>,
+    private val onArtistClicked: (Artist) -> Unit,
+    private val onAlbumClicked: (Album) -> Unit
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -68,9 +74,15 @@ class SearchAdapter(private val items: MutableList<Any>) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
         when (holder) {
-            is ArtistViewHolder -> holder.bind(item as Artist)
+            is ArtistViewHolder -> {
+                holder.bind(item as Artist)
+                holder.itemView.setOnClickListener { onArtistClicked(item) }
+            }
 
-            is AlbumViewHolder -> holder.bind(item as Album)
+            is AlbumViewHolder -> {
+                holder.bind(item as Album)
+                holder.itemView.setOnClickListener { onAlbumClicked(item) }
+            }
         }
     }
 

@@ -33,6 +33,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/ivHeaderArtistFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -70,12 +71,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    app:layout_constraintBottom_toTopOf="@id/tvLocationArtistFragment"
+                    app:layout_constraintBottom_toTopOf="@id/tvLocationAndTypeArtistFragment"
                     app:layout_constraintStart_toEndOf="@id/guidelineStartHeader"
                     tools:text="Khalid" />
 
                 <TextView
-                    android:id="@+id/tvLocationArtistFragment"
+                    android:id="@+id/tvLocationAndTypeArtistFragment"
                     style="@style/tvSubtitleTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -99,65 +100,6 @@
             app:layout_constraintTop_toBottomOf="@id/flHeaderArtistFragment"
             tools:text="Khalid, is an American singer and songwriter. He is signed to Right Hand Music Group and RCA Records. His debut single, 'Location', was released in July 2016…" />
 
-        <LinearLayout
-            android:id="@+id/llAlbumsArtistFragment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="20dp"
-            app:layout_constraintEnd_toEndOf="@id/guidelineEndBody"
-            app:layout_constraintStart_toStartOf="@id/guidelineStartBody"
-            app:layout_constraintTop_toBottomOf="@id/tvDescArtistFragment">
-
-            <TextView
-                style="@style/tvTitleTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="Albums (12)" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/platinum" />
-
-            <com.example.theaudiodbapp.components.ResourceLink
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:image="@drawable/ic_launcher_background"
-                app:linkType="album"
-                app:subtitle="2020"
-                app:title="After Hours" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llPopularTitlesArtistFragment"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="20dp"
-            app:layout_constraintEnd_toEndOf="@id/guidelineEndBody"
-            app:layout_constraintStart_toStartOf="@id/guidelineStartBody"
-            app:layout_constraintTop_toBottomOf="@id/llAlbumsArtistFragment">
-
-            <TextView
-                style="@style/tvTitleTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/most_popular_titles" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/platinum" />
-
-            <com.example.theaudiodbapp.components.TitleRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:indexRow="1"
-                app:titleRow="Walk on Water feat. Beyoncé" />
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
