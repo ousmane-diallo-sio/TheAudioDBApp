@@ -14,6 +14,5 @@ class TrackViewHolder(itemView: TrackItem) : RecyclerView.ViewHolder(itemView) {
         if (!isLastOfType) {
             itemView.setDividerVisible(true)
         }
-        // TODO : Add click listener
     }
 }

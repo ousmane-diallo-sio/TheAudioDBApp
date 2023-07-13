@@ -1,9 +1,10 @@
 package com.example.theaudiodbapp.network
 
-import android.util.Log
 import com.example.theaudiodbapp.model.AlbumsList
 import com.example.theaudiodbapp.model.ArtistsList
-import com.example.theaudiodbapp.model.PopularTitlesList
+import com.example.theaudiodbapp.model.PopularTracksList
+import com.example.theaudiodbapp.model.Track
+import com.example.theaudiodbapp.model.TracksList
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
@@ -36,13 +37,21 @@ object NetworkManager {
         .build()
         .create(NetworkAlbumI::class.java)
 
-    private val popularTitlesApi = Retrofit.Builder()
+    private val popularTracksApi = Retrofit.Builder()
         .baseUrl("https://theaudiodb.com/")
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
-        .create(NetworkPopularTitlesI::class.java)
+        .create(NetworkPopularTracksI::class.java)
+
+    private val tracksApi = Retrofit.Builder()
+        .baseUrl("https://theaudiodb.com/")
+        .client(okHttpClient)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .build()
+        .create(NetworkTracksI::class.java)
 
     fun getArtistsAsync(search: String): Deferred<ArtistsList> {
         return artistsApi.getArtistsAsync(search)
@@ -52,8 +61,12 @@ object NetworkManager {
         return albumsApi.getAlbumsAsync(search)
     }
 
-    fun getPopularTitlesAsync(artistName: String): Deferred<PopularTitlesList> {
-        return popularTitlesApi.getPopularTitlesAsync(artistName)
+    fun getPopularTracksAsync(artistName: String): Deferred<PopularTracksList> {
+        return popularTracksApi.getPopularTracksAsync(artistName)
+    }
+
+    fun getTracksAsync(albumId: String): Deferred<TracksList> {
+        return tracksApi.getTracksAsync(albumId)
     }
 
 }

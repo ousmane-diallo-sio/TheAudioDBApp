@@ -16,8 +16,7 @@ class AlbumViewHolder(itemView: ResourceLink) : RecyclerView.ViewHolder(itemView
         itemView.tvSubtitle.text = album.strArtist
         Glide.with(itemView.context)
             .load(album.strAlbumThumb)
-            .placeholder(R.drawable.placeholder_artiste)
+            .placeholder(R.drawable.placeholder_album)
             .into(itemView.ivOverview)
-        // TODO : Add click listener
     }
 }

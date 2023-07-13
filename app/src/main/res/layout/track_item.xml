@@ -18,11 +18,14 @@
 
     <TextView
         android:id="@+id/tvTitleTrackItem"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/tvIndexTrackItem"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_marginEnd="5dp"
         tools:text="Walk on Water feat. Beyoncé" />
 
     <View

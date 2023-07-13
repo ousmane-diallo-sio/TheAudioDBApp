@@ -1,11 +1,7 @@
 package com.example.theaudiodbapp.components.recyclerview
 
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.theaudiodbapp.R
 import com.example.theaudiodbapp.components.ResourceLink
 import com.example.theaudiodbapp.components.TrackItem
 import com.example.theaudiodbapp.model.Album
@@ -16,7 +12,7 @@ class SearchAdapter(
     private val items: MutableList<Any>,
     private val onArtistClicked: ((Artist) -> Unit)?,
     private val onAlbumClicked: ((Album) -> Unit)?,
-    private val onPopularTitleClicked: ((String) -> Unit)?,
+    private val onTrackClicked: ((String) -> Unit)?,
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -26,8 +22,8 @@ class SearchAdapter(
         private const val VIEW_TYPE_TRACK = 3
         private const val VIEW_TYPE_HEADER_ARTIST = 10
         private const val VIEW_TYPE_HEADER_ALBUM = 11
-        private const val VIEW_TYPE_HEADER_TITLES = 12
-        private const val VIEW_TYPE_HEADER_POPULAR_TITLES = 13
+        private const val VIEW_TYPE_HEADER_TRACK = 12
+        private const val VIEW_TYPE_HEADER_POPULAR_TRACKS = 13
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -50,11 +46,20 @@ class SearchAdapter(
                 )
             }
 
-            VIEW_TYPE_HEADER_POPULAR_TITLES -> {
+            VIEW_TYPE_HEADER_TRACK -> {
                 RVHeaderViewHolder(
                     RecyclerViewHeader(
                         parent.context,
-                        HeaderType.POPULAR_TITLES
+                        HeaderType.TRACKS
+                    )
+                )
+            }
+
+            VIEW_TYPE_HEADER_POPULAR_TRACKS -> {
+                RVHeaderViewHolder(
+                    RecyclerViewHeader(
+                        parent.context,
+                        HeaderType.POPULAR_TRACKS
                     )
                 )
             }
@@ -113,12 +118,14 @@ class SearchAdapter(
                 val tracks = items.filterIsInstance<Track>()
                 val trackIndex = tracks.indexOf(item)
                 holder.bind(trackIndex + 1, item as Track, tracks.size == trackIndex + 1)
+                // Set on click listener to navigate to the track details fragment
             }
 
             is RVHeaderViewHolder -> {
                 if (position == items.size - 1) {
                     throw IllegalArgumentException("Invalid position, a header cannot be the last item in the list")
                 }
+                // Bind the header with the number of items of the same type
                 holder.bind(items.filter { it.javaClass == items[position + 1].javaClass }.size)
             }
         }
@@ -128,14 +135,10 @@ class SearchAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (items[position]) {
-            is RecyclerViewHeader -> {
-                when ((items[position] as RecyclerViewHeader).headerType) {
-                    HeaderType.ARTISTS -> VIEW_TYPE_HEADER_ARTIST
-                    HeaderType.ALBUMS -> VIEW_TYPE_HEADER_ALBUM
-                    HeaderType.TITLES -> VIEW_TYPE_HEADER_TITLES
-                    HeaderType.POPULAR_TITLES -> VIEW_TYPE_HEADER_POPULAR_TITLES
-                }
-            }
+            HeaderType.ARTISTS -> VIEW_TYPE_HEADER_ARTIST
+            HeaderType.ALBUMS -> VIEW_TYPE_HEADER_ALBUM
+            HeaderType.TRACKS -> VIEW_TYPE_HEADER_TRACK
+            HeaderType.POPULAR_TRACKS -> VIEW_TYPE_HEADER_POPULAR_TRACKS
 
             is Artist -> VIEW_TYPE_ARTIST
             is Album -> VIEW_TYPE_ALBUM

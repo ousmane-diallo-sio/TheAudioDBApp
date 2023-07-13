@@ -5,8 +5,8 @@
     <string name="search_cta">Rechercher</string>
     <string name="artists">Artistes</string>
     <string name="albums">Albums</string>
-    <string name="most_popular_titles">Titres les plus appréciés</string>
+    <string name="most_popular_tracks">Titres les plus appréciés</string>
     <string name="no_result_for_query">Aucun résultat ne correspond à votre recherche</string>
     <string name="cta_search">Effectuez une recherche</string>
-    <string name="titles">Titres</string>
+    <string name="tracks">Titres</string>
 </resources>

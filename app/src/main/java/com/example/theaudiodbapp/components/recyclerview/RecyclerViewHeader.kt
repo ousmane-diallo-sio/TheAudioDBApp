@@ -39,15 +39,15 @@ class RecyclerViewHeader(context: Context, attrs: AttributeSet?) : LinearLayout(
 enum class HeaderType {
     ARTISTS,
     ALBUMS,
-    TITLES,
-    POPULAR_TITLES;
+    TRACKS,
+    POPULAR_TRACKS;
 
     fun getStringValue(context: Context): String {
         return when (this) {
             ARTISTS -> context.getString(R.string.artists)
             ALBUMS -> context.getString(R.string.albums)
-            TITLES -> context.getString(R.string.titles)
-            POPULAR_TITLES -> context.getString(R.string.most_popular_titles)
+            TRACKS -> context.getString(R.string.tracks)
+            POPULAR_TRACKS -> context.getString(R.string.most_popular_tracks)
         }
     }
 }

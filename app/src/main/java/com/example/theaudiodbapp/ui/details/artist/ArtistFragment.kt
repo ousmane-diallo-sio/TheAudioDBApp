@@ -25,7 +25,6 @@ import com.example.theaudiodbapp.components.recyclerview.RecyclerViewHeader
 import com.example.theaudiodbapp.components.recyclerview.SearchAdapter
 import com.example.theaudiodbapp.utils.Helpers
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class ArtistFragment : Fragment() {
@@ -48,7 +47,7 @@ class ArtistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val navigationController = findNavController()
+        val navController = findNavController()
 
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
         bottomNavigationView?.visibility = View.GONE
@@ -72,7 +71,7 @@ class ArtistFragment : Fragment() {
         tvDesc.text = args.artist.strBiographyEN
 
         btnBack.setOnClickListener {
-            navigationController.navigate(
+            navController.navigate(
                 ArtistFragmentDirections.actionArtistFragmentToSearchFragment(
                     args.artist.strArtist
                 )
@@ -82,7 +81,7 @@ class ArtistFragment : Fragment() {
         val searchAdapter = SearchAdapter(
             mutableListOf(),
             null,
-            null,
+            { navController.navigate(ArtistFragmentDirections.actionArtistFragmentToAlbumFragment(it)) },
             null
         )
         rvDetails.layoutManager = LinearLayoutManager(requireContext())
@@ -90,7 +89,7 @@ class ArtistFragment : Fragment() {
         addItemDecoration(rvDetails)
 
         val albumsHeader = if (args.albums.isNotEmpty()) {
-            RecyclerViewHeader(requireContext(), HeaderType.ALBUMS)
+            HeaderType.ALBUMS
         } else null
 
         searchAdapter.updateData(
@@ -99,15 +98,15 @@ class ArtistFragment : Fragment() {
         )
 
         lifecycleScope.launch {
-            viewModel.popularTitlesFlow.collect {
-                val popularTitlesHeader = if (it.isNotEmpty()) {
-                    RecyclerViewHeader(requireContext(), HeaderType.POPULAR_TITLES)
+            viewModel.popularTracksFlow.collect {
+                val popularTracksHeader = if (it.isNotEmpty()) {
+                    HeaderType.POPULAR_TRACKS
                 } else null
 
                 searchAdapter.updateData(
                     listOf(albumsHeader) +
                             args.albums.toList() +
-                            listOf(popularTitlesHeader) +
+                            listOf(popularTracksHeader) +
                             it
                 )
             }
@@ -140,7 +139,7 @@ class ArtistFragment : Fragment() {
                     override fun onAnimationStart(animation: Animation?) {}
 
                     override fun onAnimationEnd(animation: Animation?) {
-                        viewModel.getPopularTitles(args.artist.strArtist)
+                        viewModel.getPopularTracks(args.artist.strArtist)
                     }
 
                     override fun onAnimationRepeat(animation: Animation?) {}
@@ -154,8 +153,6 @@ class ArtistFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
-        bottomNavigationView?.visibility = View.VISIBLE
         _binding = null
     }
 

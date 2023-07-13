@@ -9,7 +9,7 @@
         <attr name="subtitle" format="string" />
         <attr name="image" format="reference" />
     </declare-styleable>
-    <declare-styleable name="TitleRow">
+    <declare-styleable name="TrackItem">
         <attr name="indexRow" format="integer" />
         <attr name="titleRow" format="string" />
     </declare-styleable>

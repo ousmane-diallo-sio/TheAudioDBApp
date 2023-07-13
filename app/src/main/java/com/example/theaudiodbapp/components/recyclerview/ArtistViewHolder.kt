@@ -17,6 +17,5 @@ class ArtistViewHolder(itemView: ResourceLink) : RecyclerView.ViewHolder(itemVie
             .load(artist.strArtistThumb)
             .placeholder(R.drawable.placeholder_artiste)
             .into(itemView.ivOverview)
-        // TODO : Add click listener
     }
 }

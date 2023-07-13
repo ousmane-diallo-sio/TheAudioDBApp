@@ -1,5 +1,5 @@
 package com.example.theaudiodbapp.model
 
-data class PopularTitlesList(
+data class PopularTracksList(
     val track: List<Track>?
 )
