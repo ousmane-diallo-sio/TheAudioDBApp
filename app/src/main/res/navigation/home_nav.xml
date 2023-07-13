@@ -10,13 +10,18 @@
         android:id="@+id/rankingFragment"
         android:name="com.example.theaudiodbapp.ui.home.ranking.RankingFragment"
         android:label="RankingFragment"
-        tools:layout="@layout/ranking_fragment" />
+        tools:layout="@layout/ranking_fragment">
+        <action
+            android:id="@+id/action_rankingFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.theaudiodbapp.ui.home.search.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/search_fragment">
+
         <argument
             android:name="search"
             android:defaultValue=""
@@ -28,12 +33,16 @@
             app:destination="@id/artistFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_searchFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/artistFragment"
         android:name="com.example.theaudiodbapp.ui.details.artist.ArtistFragment"
         android:label="ArtistFragment">
+
         <argument
             android:name="artist"
             app:argType="com.example.theaudiodbapp.model.Artist" />
@@ -45,6 +54,28 @@
             app:destination="@id/searchFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_artistFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/albumFragment"
+        android:name="com.example.theaudiodbapp.ui.details.album.AlbumFragment"
+        android:label="AlbumFragment">
+
+        <argument
+            android:name="album"
+            app:argType="com.example.theaudiodbapp.model.Album" />
+        <action
+            android:id="@+id/action_albumFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_albumFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_albumFragment_to_artistFragment"
+            app:destination="@id/artistFragment" />
     </fragment>
 
 </navigation>

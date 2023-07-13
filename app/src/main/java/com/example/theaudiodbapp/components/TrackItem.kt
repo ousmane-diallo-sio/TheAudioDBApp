@@ -25,10 +25,10 @@ class TrackItem(context: Context, private val attrs: AttributeSet?) : LinearLayo
     }
 
     private fun handleAttrs() {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleRow)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.TrackItem)
 
-        val index = typedArray.getInt(R.styleable.TitleRow_indexRow, 0)
-        val title = typedArray.getString(R.styleable.TitleRow_titleRow)
+        val index = typedArray.getInt(R.styleable.TrackItem_indexRow, 0)
+        val title = typedArray.getString(R.styleable.TrackItem_titleRow)
 
         tvIndex.text = index.toString()
         tvTitle.text = title

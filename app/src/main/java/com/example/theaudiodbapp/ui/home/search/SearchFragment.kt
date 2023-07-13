@@ -66,7 +66,7 @@ class SearchFragment : Fragment() {
                     )
                 )
             },
-            null,
+            { navController.navigate(SearchFragmentDirections.actionSearchFragmentToAlbumFragment(it)) },
             null
         )
         rvArtists.layoutManager = LinearLayoutManager(requireContext())
@@ -119,11 +119,11 @@ class SearchFragment : Fragment() {
                 artists.artists?.let { artists ->
 
                     val artistHeader = if (artists.isNotEmpty()) {
-                        RecyclerViewHeader(requireContext(), HeaderType.ARTISTS)
+                        HeaderType.ARTISTS
                     } else null
 
                     val albumHeader = if ((viewModel.albumsFlow.value.album?.size ?: 0) > 0) {
-                        RecyclerViewHeader(requireContext(), HeaderType.ALBUMS)
+                        HeaderType.ALBUMS
                     } else null
 
                     searchAdapter.updateData(
@@ -151,11 +151,11 @@ class SearchFragment : Fragment() {
             viewModel.albumsFlow.collect { albums ->
                 albums.album?.let { album ->
                     val artistHeader = if ((viewModel.artistsFlow.value.artists?.size ?: 0) > 0) {
-                        RecyclerViewHeader(requireContext(), HeaderType.ARTISTS)
+                        HeaderType.ARTISTS
                     } else null
 
                     val albumHeader = if (album.isNotEmpty()) {
-                        RecyclerViewHeader(requireContext(), HeaderType.ALBUMS)
+                        HeaderType.ALBUMS
                     } else null
                     searchAdapter.updateData(
                         listOf(artistHeader) +
@@ -167,9 +167,8 @@ class SearchFragment : Fragment() {
             }
         }
 
-        // TODO remove this code
-        binding.ciSearchSearchFragment.et.setText("Booba")
-        binding.ciSearchSearchFragment.onTextChange?.onTextChanged("Prince", 0, 0, 0)
+        // TODO remove the following line
+        binding.ciSearchSearchFragment.onTextChange?.onTextChanged("eminem", 0, 0, 0)
     }
 
     override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
