@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:paddingTop="17dp"
+        android:paddingTop="20dp"
         android:text="@string/artists" />
 
     <View

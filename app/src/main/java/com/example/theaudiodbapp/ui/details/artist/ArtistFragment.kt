@@ -125,8 +125,7 @@ class ArtistFragment : Fragment() {
                 super.getItemOffsets(outRect, view, parent, state)
                 when(view) {
                     is ResourceLink -> {
-                        outRect.top = Helpers.convertDpToPx(5).toInt()
-                        outRect.bottom = Helpers.convertDpToPx(5).toInt()
+                        outRect.top = Helpers.convertDpToPx(10).toInt()
                     }
                 }
             }
