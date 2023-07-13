@@ -83,8 +83,11 @@ class SearchFragment : Fragment() {
                 viewModel.resetArtists()
                 viewModel.resetAlbums()
                 if (!s.isNullOrEmpty()) {
-                    viewModel.getArtists(s.toString())
-                    viewModel.getAlbums(s.toString())
+                    GlobalScope.launch {
+                        delay(100)
+                        viewModel.getArtists(s.toString())
+                        viewModel.getAlbums(s.toString())
+                    }
                 }
             }
 
