@@ -166,9 +166,6 @@ class SearchFragment : Fragment() {
                 }
             }
         }
-
-        // TODO remove the following line
-        binding.ciSearchSearchFragment.onTextChange?.onTextChanged("eminem", 0, 0, 0)
     }
 
     override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
