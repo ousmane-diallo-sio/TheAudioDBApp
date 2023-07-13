@@ -1,6 +1,10 @@
 package com.example.theaudiodbapp.model
 
-data class Artist(
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+class Artist(
     val idArtist: String,
     val idLabel: String,
     val intBornYear: String,
@@ -13,15 +17,14 @@ data class Artist(
     val strArtistBanner: String,
     val strArtistClearart: String,
     val strArtistCutout: String,
-    val strArtistFanart: String,
-    val strArtistFanart2: String,
+    val strArtistFanart: String?,
+    val strArtistFanart2: String?,
     val strArtistFanart3: String,
     val strArtistFanart4: String,
     val strArtistLogo: String,
-    val strArtistStripped: Any,
     val strArtistThumb: String,
-    val strArtistWideThumb: String,
-    val strBiographyCN: Any,
+    val strArtistWideThumb: String?,
+    val strBiographyCN: String,
     val strBiographyDE: String,
     val strBiographyEN: String,
     val strBiographyES: String,
@@ -29,20 +32,18 @@ data class Artist(
     val strBiographyHU: String,
     val strBiographyIL: String,
     val strBiographyIT: String,
-    val strBiographyJP: Any,
+    val strBiographyJP: String,
     val strBiographyNL: String,
     val strBiographyNO: String,
     val strBiographyPL: String,
     val strBiographyPT: String,
     val strBiographyRU: String,
     val strBiographySE: String,
-    val strCountry: String,
+    val strCountry: String?,
     val strCountryCode: String,
-    val strDisbanded: Any,
     val strFacebook: String,
     val strGender: String,
-    val strGenre: String,
-    val strISNIcode: Any,
+    val strGenre: String?,
     val strLabel: String,
     val strLastFMChart: String,
     val strLocked: String,
@@ -51,4 +52,4 @@ data class Artist(
     val strStyle: String,
     val strTwitter: String,
     val strWebsite: String
-)
+) : Parcelable

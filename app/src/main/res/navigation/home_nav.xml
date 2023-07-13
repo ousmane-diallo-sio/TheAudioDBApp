@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav.xml"
-    app:startDestination="@id/rankingFragment">
+    app:startDestination="@id/searchFragment">
+    <!-- TODO replace searchFragment by rankingFragment -->
 
     <fragment
         android:id="@+id/rankingFragment"
@@ -15,6 +16,35 @@
         android:id="@+id/searchFragment"
         android:name="com.example.theaudiodbapp.ui.home.search.SearchFragment"
         android:label="SearchFragment"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/search_fragment">
+        <argument
+            android:name="search"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_searchFragment_to_artistFragment"
+            app:destination="@id/artistFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/artistFragment"
+        android:name="com.example.theaudiodbapp.ui.details.artist.ArtistFragment"
+        android:label="ArtistFragment">
+        <argument
+            android:name="artist"
+            app:argType="com.example.theaudiodbapp.model.Artist" />
+        <argument
+            android:name="albums"
+            app:argType="com.example.theaudiodbapp.model.Album[]" />
+        <action
+            android:id="@+id/action_artistFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
+    </fragment>
 
 </navigation>

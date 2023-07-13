@@ -3,6 +3,7 @@ package com.example.theaudiodbapp.network
 import android.util.Log
 import com.example.theaudiodbapp.model.AlbumsList
 import com.example.theaudiodbapp.model.ArtistsList
+import com.example.theaudiodbapp.model.PopularTitlesList
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
@@ -35,12 +36,24 @@ object NetworkManager {
         .build()
         .create(NetworkAlbumI::class.java)
 
+    private val popularTitlesApi = Retrofit.Builder()
+        .baseUrl("https://theaudiodb.com/")
+        .client(okHttpClient)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .build()
+        .create(NetworkPopularTitlesI::class.java)
+
     fun getArtistsAsync(search: String): Deferred<ArtistsList> {
         return artistsApi.getArtistsAsync(search)
     }
 
     fun getAlbumsAsync(search: String): Deferred<AlbumsList> {
         return albumsApi.getAlbumsAsync(search)
+    }
+
+    fun getPopularTitlesAsync(artistName: String): Deferred<PopularTitlesList> {
+        return popularTitlesApi.getPopularTitlesAsync(artistName)
     }
 
 }

@@ -8,16 +8,18 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.theaudiodbapp.R
 
-class TitleRow(context: Context, private val attrs: AttributeSet?) : LinearLayout(context, attrs) {
+class TrackItem(context: Context, private val attrs: AttributeSet?) : LinearLayout(context, attrs) {
 
     private val tvIndex: TextView
     private val tvTitle: TextView
+    private val vDivider: View
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.title_row, this)
+        LayoutInflater.from(context).inflate(R.layout.track_item, this)
 
-        tvIndex = findViewById(R.id.tvIndexTitleRow)
-        tvTitle = findViewById(R.id.tvTitleTitleRow)
+        tvIndex = findViewById(R.id.tvIndexTrackItem)
+        tvTitle = findViewById(R.id.tvTitleTrackItem)
+        vDivider = findViewById(R.id.vDividerTrackItem)
 
         handleAttrs()
     }
@@ -35,5 +37,9 @@ class TitleRow(context: Context, private val attrs: AttributeSet?) : LinearLayou
     fun setIndex(index: Int) { tvIndex.text = index.toString() }
 
     fun setTitle(title: String) { tvTitle.text = title }
+
+    fun setDividerVisible(visible: Boolean) {
+        vDivider.visibility = if (visible) VISIBLE else GONE
+    }
 
 }

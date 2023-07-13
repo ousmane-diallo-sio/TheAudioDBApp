@@ -1,36 +1,45 @@
 package com.example.theaudiodbapp.ui.home.search
 
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.theaudiodbapp.R
-import com.example.theaudiodbapp.components.CustomInput
 import com.example.theaudiodbapp.components.recyclerview.HeaderType
 import com.example.theaudiodbapp.components.recyclerview.RecyclerViewHeader
 import com.example.theaudiodbapp.databinding.SearchFragmentBinding
 import com.example.theaudiodbapp.components.recyclerview.SearchAdapter
+import com.example.theaudiodbapp.ui.details.artist.ArtistFragmentArgs
 import com.example.theaudiodbapp.utils.Helpers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.Timer
 
 class SearchFragment : Fragment() {
 
     private var _binding: SearchFragmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: SearchViewModel by viewModels()
+    private val args: SearchFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = SearchFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,12 +47,28 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val ciSearch = view.findViewById<CustomInput>(R.id.ciSearchSearchFragment)
-        val rvArtists = view.findViewById<RecyclerView>(R.id.rvArtistsSearchFragment)
+        val ciSearch = binding.ciSearchSearchFragment
+        val rvArtists = binding.rvArtistsSearchFragment
         val lytNoResultArtists = view.findViewById<View>(R.id.lytNoResultSearchFragment)
         val lytSearchArtistsPlaceholder = view.findViewById<View>(R.id.lytSearchSearchFragment)
 
-        val searchAdapter = SearchAdapter(mutableListOf())
+        val navController = findNavController()
+
+        val searchAdapter = SearchAdapter(
+            mutableListOf(),
+            { item ->
+                navController.navigate(
+                    SearchFragmentDirections.actionSearchFragmentToArtistFragment(
+                        item,
+                        viewModel.albumsFlow.value.album?.filter { it.strArtist == item.strArtist }
+                            ?.toTypedArray()
+                            ?: arrayOf()
+                    )
+                )
+            },
+            null,
+            null
+        )
         rvArtists.layoutManager = LinearLayoutManager(requireContext())
         rvArtists.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
@@ -66,12 +91,27 @@ class SearchFragment : Fragment() {
                 viewModel.resetArtists()
                 viewModel.resetAlbums()
                 if (!s.isNullOrEmpty()) {
-                    viewModel.getArtists(s.toString())
-                    viewModel.getAlbums(s.toString())
+                    GlobalScope.launch {
+                        delay(100)
+                        viewModel.getArtists(s.toString())
+                        viewModel.getAlbums(s.toString())
+                    }
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {}
+        }
+
+        lifecycleScope.launch {
+            viewModel.loadingFlow.collect {
+                if (it) {
+                    binding.pbSearchFragment.visibility = View.VISIBLE
+                    lytNoResultArtists.visibility = View.GONE
+                    lytSearchArtistsPlaceholder.visibility = View.GONE
+                } else {
+                    binding.pbSearchFragment.visibility = View.GONE
+                }
+            }
         }
 
         lifecycleScope.launch {
@@ -125,6 +165,33 @@ class SearchFragment : Fragment() {
                     )
                 }
             }
+        }
+
+        // TODO remove this code
+        binding.ciSearchSearchFragment.et.setText("Booba")
+        binding.ciSearchSearchFragment.onTextChange?.onTextChanged("Prince", 0, 0, 0)
+    }
+
+    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
+        try {
+            val animation = AnimationUtils.loadAnimation(requireContext(), nextAnim)
+            if (enter) {
+                animation?.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationStart(animation: Animation?) {}
+
+                    override fun onAnimationEnd(animation: Animation?) {
+                        args.search?.let {
+                            binding.ciSearchSearchFragment.et.setText(it)
+                            binding.ciSearchSearchFragment.onTextChange?.onTextChanged(it, 0, 0, 0)
+                        }
+                    }
+
+                    override fun onAnimationRepeat(animation: Animation?) {}
+                })
+            }
+            return animation
+        } catch (e: Exception) {
+            return super.onCreateAnimation(transit, enter, nextAnim)
         }
     }
 

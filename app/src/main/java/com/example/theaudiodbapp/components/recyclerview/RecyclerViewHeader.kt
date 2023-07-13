@@ -1,7 +1,9 @@
 package com.example.theaudiodbapp.components.recyclerview
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -25,6 +27,12 @@ class RecyclerViewHeader(context: Context, attrs: AttributeSet?) : LinearLayout(
 
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         tvHeader = findViewById(R.id.tvRecyclerViewHeader)
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun addCounter(context: Context, count: Int) {
+        tvHeader.text = "${headerType.getStringValue(context)} ($count)"
+        Log.w("RecyclerViewHeader", "addCounter: ${tvHeader.text}")
     }
 }
 

@@ -59,8 +59,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guidelineStartSearchFragment"
         app:layout_constraintEnd_toEndOf="@id/guidelineEndSearchFragment"
-        app:layout_constraintTop_toBottomOf="@id/vSeparatorSearchFragment"
-        android:paddingBottom="?attr/actionBarSize"/>
+        app:layout_constraintTop_toBottomOf="@id/vSeparatorSearchFragment" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,6 +79,13 @@
             android:id="@+id/lytSearchSearchFragment"
             android:visibility="gone"
             layout="@layout/search_placeholder"/>
+        
+        <ProgressBar
+            android:id="@+id/pbSearchFragment"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
