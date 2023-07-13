@@ -37,6 +37,9 @@
         <argument
             android:name="artist"
             app:argType="com.example.theaudiodbapp.model.Artist" />
+        <argument
+            android:name="albums"
+            app:argType="com.example.theaudiodbapp.model.Album[]" />
         <action
             android:id="@+id/action_artistFragment_to_searchFragment"
             app:destination="@id/searchFragment"

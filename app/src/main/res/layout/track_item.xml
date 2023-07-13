@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/tvIndexTitleRow"
+        android:id="@+id/tvIndexTrackItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,12 +17,21 @@
         tools:text="1" />
 
     <TextView
-        android:id="@+id/tvTitleTitleRow"
+        android:id="@+id/tvTitleTrackItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/tvIndexTitleRow"
+        app:layout_constraintStart_toEndOf="@id/tvIndexTrackItem"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:text="Walk on Water feat. Beyoncé" />
+
+    <View
+        android:id="@+id/vDividerTrackItem"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="@id/tvTitleTrackItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/platinum" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

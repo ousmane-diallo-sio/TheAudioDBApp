@@ -57,9 +57,17 @@ class SearchFragment : Fragment() {
         val searchAdapter = SearchAdapter(
             mutableListOf(),
             { item ->
-                navController.navigate(SearchFragmentDirections.actionSearchFragmentToArtistFragment(item))
+                navController.navigate(
+                    SearchFragmentDirections.actionSearchFragmentToArtistFragment(
+                        item,
+                        viewModel.albumsFlow.value.album?.filter { it.strArtist == item.strArtist }
+                            ?.toTypedArray()
+                            ?: arrayOf()
+                    )
+                )
             },
-            {  }
+            null,
+            null
         )
         rvArtists.layoutManager = LinearLayoutManager(requireContext())
         rvArtists.addItemDecoration(object : RecyclerView.ItemDecoration() {
@@ -158,6 +166,10 @@ class SearchFragment : Fragment() {
                 }
             }
         }
+
+        // TODO remove this code
+        binding.ciSearchSearchFragment.et.setText("Booba")
+        binding.ciSearchSearchFragment.onTextChange?.onTextChanged("Prince", 0, 0, 0)
     }
 
     override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {

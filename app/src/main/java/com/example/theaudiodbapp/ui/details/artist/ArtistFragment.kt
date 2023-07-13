@@ -10,11 +10,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.theaudiodbapp.R
+import com.example.theaudiodbapp.components.ResourceLink
+import com.example.theaudiodbapp.components.recyclerview.HeaderType
+import com.example.theaudiodbapp.components.recyclerview.RecyclerViewHeader
+import com.example.theaudiodbapp.components.recyclerview.SearchAdapter
+import com.example.theaudiodbapp.utils.Helpers
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class ArtistFragment : Fragment() {
 
@@ -46,6 +56,7 @@ class ArtistFragment : Fragment() {
         val tvArtistName = view.findViewById<TextView>(R.id.tvArtistNameArtistFragment)
         val tvLocationAndType = view.findViewById<TextView>(R.id.tvLocationAndTypeArtistFragment)
         val tvDesc = view.findViewById<TextView>(R.id.tvDescArtistFragment)
+        val rvDetails = view.findViewById<RecyclerView>(R.id.rvDetailsArtistFragment)
 
         val headerImg = args.artist.strArtistFanart2 ?: args.artist.strArtistFanart
         ?: args.artist.strArtistWideThumb ?: args.artist.strArtistThumb
@@ -65,6 +76,60 @@ class ArtistFragment : Fragment() {
                 )
             )
         }
+
+        val searchAdapter = SearchAdapter(
+            mutableListOf(),
+            null,
+            null,
+            null
+        )
+        rvDetails.layoutManager = LinearLayoutManager(requireContext())
+        rvDetails.adapter = searchAdapter
+        addItemDecoration(rvDetails)
+
+        val albumsHeader = if (args.albums.isNotEmpty()) {
+            RecyclerViewHeader(requireContext(), HeaderType.ALBUMS)
+        } else null
+
+        searchAdapter.updateData(
+            listOf(albumsHeader) +
+                    args.albums.toList()
+        )
+
+        viewModel.getPopularTitles(args.artist.strArtist)
+        lifecycleScope.launch {
+            viewModel.popularTitlesFlow.collect {
+                val popularTitlesHeader = if (it.isNotEmpty()) {
+                    RecyclerViewHeader(requireContext(), HeaderType.POPULAR_TITLES)
+                } else null
+
+                searchAdapter.updateData(
+                    listOf(albumsHeader) +
+                            args.albums.toList() +
+                            listOf(popularTitlesHeader) +
+                            it
+                )
+            }
+        }
+    }
+
+    private fun addItemDecoration(rv: RecyclerView) {
+        rv.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: android.graphics.Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                super.getItemOffsets(outRect, view, parent, state)
+                when(view) {
+                    is ResourceLink -> {
+                        outRect.top = Helpers.convertDpToPx(5).toInt()
+                        outRect.bottom = Helpers.convertDpToPx(5).toInt()
+                    }
+                }
+            }
+        })
     }
 
     override fun onDestroyView() {
