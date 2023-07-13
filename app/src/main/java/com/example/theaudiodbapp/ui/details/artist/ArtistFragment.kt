@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -96,7 +98,6 @@ class ArtistFragment : Fragment() {
                     args.albums.toList()
         )
 
-        viewModel.getPopularTitles(args.artist.strArtist)
         lifecycleScope.launch {
             viewModel.popularTitlesFlow.collect {
                 val popularTitlesHeader = if (it.isNotEmpty()) {
@@ -130,6 +131,26 @@ class ArtistFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
+        try {
+            val animation = AnimationUtils.loadAnimation(requireContext(), nextAnim)
+            if (enter) {
+                animation?.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationStart(animation: Animation?) {}
+
+                    override fun onAnimationEnd(animation: Animation?) {
+                        viewModel.getPopularTitles(args.artist.strArtist)
+                    }
+
+                    override fun onAnimationRepeat(animation: Animation?) {}
+                })
+            }
+            return animation
+        } catch (e: Exception) {
+            return super.onCreateAnimation(transit, enter, nextAnim)
+        }
     }
 
     override fun onDestroyView() {
