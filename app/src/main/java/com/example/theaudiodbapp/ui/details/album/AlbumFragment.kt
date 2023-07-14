@@ -79,9 +79,8 @@ class AlbumFragment : Fragment() {
         val searchAdapter = SearchAdapter(
             mutableListOf(),
             null,
-            null,
             null
-        )
+        ) { navController.navigate(AlbumFragmentDirections.actionAlbumFragmentToTrackFragment(it)) }
         rvTracks.adapter = searchAdapter
 
         lifecycleScope.launch {

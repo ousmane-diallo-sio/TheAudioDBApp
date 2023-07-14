@@ -12,7 +12,7 @@ class SearchAdapter(
     private val items: MutableList<Any>,
     private val onArtistClicked: ((Artist) -> Unit)?,
     private val onAlbumClicked: ((Album) -> Unit)?,
-    private val onTrackClicked: ((String) -> Unit)?,
+    private val onTrackClicked: ((Track) -> Unit)?,
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -118,7 +118,7 @@ class SearchAdapter(
                 val tracks = items.filterIsInstance<Track>()
                 val trackIndex = tracks.indexOf(item)
                 holder.bind(trackIndex + 1, item as Track, tracks.size == trackIndex + 1)
-                // Set on click listener to navigate to the track details fragment
+                holder.itemView.setOnClickListener { onTrackClicked?.invoke(item) }
             }
 
             is RVHeaderViewHolder -> {
