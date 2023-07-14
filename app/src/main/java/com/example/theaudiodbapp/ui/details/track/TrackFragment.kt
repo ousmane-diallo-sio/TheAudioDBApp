@@ -52,7 +52,7 @@ class TrackFragment : Fragment() {
             .into(ivThumb)
 
         tvTrackName.text = args.track.strTrack
-
+        tvLyrics.text = args.track.getDescriptionByLanguage()
 
     }
 

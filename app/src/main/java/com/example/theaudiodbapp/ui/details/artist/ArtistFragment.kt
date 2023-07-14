@@ -68,7 +68,7 @@ class ArtistFragment : Fragment() {
             .into(ivHeader)
         tvArtistName.text = args.artist.strArtist
         tvLocationAndType.text = "${args.artist.strCountry ?: ""} - ${args.artist.strGenre ?: ""}"
-        tvDesc.text = args.artist.strBiographyEN
+        tvDesc.text = args.artist.getBiographyByLanguage()
 
         btnBack.setOnClickListener {
             navController.navigate(

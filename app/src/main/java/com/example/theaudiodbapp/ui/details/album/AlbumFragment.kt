@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +20,7 @@ import com.example.theaudiodbapp.components.recyclerview.SearchAdapter
 import com.example.theaudiodbapp.databinding.AlbumFragmentBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class AlbumFragment : Fragment() {
 
@@ -36,7 +38,6 @@ class AlbumFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -69,8 +70,8 @@ class AlbumFragment : Fragment() {
         tvArtistName.text = args.album.strArtist
         tvAlbumName.text = args.album.strAlbum
         tvRating.text = args.album.intScore
-        tvVoteCount.text = "${args.album.intScoreVotes ?: 0} votes"
-        tvDesc.text = args.album.strDescriptionEN
+        tvVoteCount.text = getString(R.string.votes, args.album.intScoreVotes ?: 0)
+        tvDesc.text = args.album.getDescriptionByLanguage()
 
         btnBack.setOnClickListener { navController.popBackStack() }
 
