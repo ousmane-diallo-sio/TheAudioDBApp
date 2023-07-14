@@ -9,4 +9,5 @@
     <string name="no_result_for_query">Aucun résultat ne correspond à votre recherche</string>
     <string name="cta_search">Effectuez une recherche</string>
     <string name="tracks">Titres</string>
+    <string name="lyrics">Paroles</string>
 </resources>

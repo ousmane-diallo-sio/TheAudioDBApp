@@ -82,7 +82,7 @@ class ArtistFragment : Fragment() {
             mutableListOf(),
             null,
             { navController.navigate(ArtistFragmentDirections.actionArtistFragmentToAlbumFragment(it)) },
-            null
+            { navController.navigate(ArtistFragmentDirections.actionArtistFragmentToTrackFragment(it)) }
         )
         rvDetails.layoutManager = LinearLayoutManager(requireContext())
         rvDetails.adapter = searchAdapter

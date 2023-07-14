@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_rankingFragment_to_albumFragment"
             app:destination="@id/albumFragment" />
+        <action
+            android:id="@+id/action_rankingFragment_to_trackFragment"
+            app:destination="@id/trackFragment" />
     </fragment>
 
     <fragment
@@ -56,6 +59,9 @@
         <action
             android:id="@+id/action_artistFragment_to_albumFragment"
             app:destination="@id/albumFragment" />
+        <action
+            android:id="@+id/action_artistFragment_to_trackFragment"
+            app:destination="@id/trackFragment" />
     </fragment>
 
     <fragment
@@ -75,6 +81,28 @@
         <action
             android:id="@+id/action_albumFragment_to_artistFragment"
             app:destination="@id/artistFragment" />
+        <action
+            android:id="@+id/action_albumFragment_to_trackFragment"
+            app:destination="@id/trackFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/trackFragment"
+        android:name="com.example.theaudiodbapp.ui.details.track.TrackFragment"
+        android:label="TrackFragment">
+
+        <argument
+            android:name="track"
+            app:argType="com.example.theaudiodbapp.model.Track" />
+        <action
+            android:id="@+id/action_trackFragment_to_artistFragment"
+            app:destination="@id/artistFragment" />
+        <action
+            android:id="@+id/action_trackFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_trackFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
     </fragment>
 
 </navigation>

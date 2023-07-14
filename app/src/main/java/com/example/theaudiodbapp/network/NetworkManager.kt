@@ -13,45 +13,27 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkManager {
-    private val loggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
-    }
 
     private val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(loggingInterceptor)
+        .addInterceptor(HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        })
         .build()
 
-    private val artistsApi = Retrofit.Builder()
+    private val api = Retrofit.Builder()
         .baseUrl("https://theaudiodb.com/")
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
-        .create(NetworkArtistI::class.java)
 
-    private val albumsApi = Retrofit.Builder()
-        .baseUrl("https://theaudiodb.com/")
-        .client(okHttpClient)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .build()
-        .create(NetworkAlbumI::class.java)
+    private val artistsApi = api.create(NetworkArtistI::class.java)
 
-    private val popularTracksApi = Retrofit.Builder()
-        .baseUrl("https://theaudiodb.com/")
-        .client(okHttpClient)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .build()
-        .create(NetworkPopularTracksI::class.java)
+    private val albumsApi = api.create(NetworkAlbumI::class.java)
 
-    private val tracksApi = Retrofit.Builder()
-        .baseUrl("https://theaudiodb.com/")
-        .client(okHttpClient)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .build()
-        .create(NetworkTracksI::class.java)
+    private val popularTracksApi = api.create(NetworkPopularTracksI::class.java)
+
+    private val tracksApi = api.create(NetworkTracksI::class.java)
 
     fun getArtistsAsync(search: String): Deferred<ArtistsList> {
         return artistsApi.getArtistsAsync(search)
