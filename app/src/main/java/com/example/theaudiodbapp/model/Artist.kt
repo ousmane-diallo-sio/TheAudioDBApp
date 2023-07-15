@@ -2,6 +2,7 @@ package com.example.theaudiodbapp.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import java.util.Locale
 
 @Parcelize
 class Artist(
@@ -24,21 +25,21 @@ class Artist(
     val strArtistLogo: String,
     val strArtistThumb: String,
     val strArtistWideThumb: String?,
-    val strBiographyCN: String,
-    val strBiographyDE: String,
-    val strBiographyEN: String,
-    val strBiographyES: String,
-    val strBiographyFR: String,
-    val strBiographyHU: String,
-    val strBiographyIL: String,
-    val strBiographyIT: String,
-    val strBiographyJP: String,
-    val strBiographyNL: String,
-    val strBiographyNO: String,
-    val strBiographyPL: String,
-    val strBiographyPT: String,
-    val strBiographyRU: String,
-    val strBiographySE: String,
+    private val strBiographyCN: String?,
+    private val strBiographyDE: String?,
+    private val strBiographyEN: String?,
+    private val strBiographyES: String?,
+    private val strBiographyFR: String?,
+    private val strBiographyHU: String?,
+    private val strBiographyIL: String?,
+    private val strBiographyIT: String?,
+    private val strBiographyJP: String?,
+    private val strBiographyNL: String?,
+    private val strBiographyNO: String?,
+    private val strBiographyPL: String?,
+    private val strBiographyPT: String?,
+    private val strBiographyRU: String?,
+    private val strBiographySE: String?,
     val strCountry: String?,
     val strCountryCode: String,
     val strFacebook: String,
@@ -52,4 +53,27 @@ class Artist(
     val strStyle: String,
     val strTwitter: String,
     val strWebsite: String
-) : Parcelable
+) : Parcelable {
+
+    fun getBiographyByLanguage(): String? {
+        val translation = when (Locale.getDefault().language) {
+            "cn" -> strBiographyCN
+            "de" -> strBiographyDE
+            "es" -> strBiographyES
+            "hu" -> strBiographyHU
+            "fr" -> strBiographyFR
+            "il" -> strBiographyIL
+            "it" -> strBiographyIT
+            "jp" -> strBiographyJP
+            "nl" -> strBiographyNL
+            "no" -> strBiographyNO
+            "pl" -> strBiographyPL
+            "pt" -> strBiographyPT
+            "ru" -> strBiographyRU
+            "se" -> strBiographySE
+            else -> strBiographyEN
+        } ?: strBiographyEN
+
+        return translation
+    }
+}
