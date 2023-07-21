@@ -12,4 +12,5 @@
     <string name="tracks">Titres</string>
     <string name="lyrics">Paroles</string>
     <string name="votes">%s votes</string>
+    <string name="classement">Classements</string>
 </resources>
