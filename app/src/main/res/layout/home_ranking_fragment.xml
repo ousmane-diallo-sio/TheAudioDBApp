@@ -41,12 +41,12 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.tabs.TabItem
-                android:text="Titres"
+                android:text="@string/tracks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <com.google.android.material.tabs.TabItem
-                android:text="albums"
+                android:text="@string/albums"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
