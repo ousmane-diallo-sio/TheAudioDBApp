@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ResourceLink">
+        <attr name="linkType" format="enum">
+            <enum name="artist" value="0" />
+            <enum name="album" value="1" />
+        </attr>
+        <attr name="title" format="string" />
+        <attr name="subtitle" format="string" />
+        <attr name="image" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="TrackItem">
+        <attr name="indexRow" format="integer" />
+        <attr name="titleRow" format="string" />
+    </declare-styleable>
+</resources>

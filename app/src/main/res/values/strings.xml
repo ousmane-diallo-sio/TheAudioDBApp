@@ -1,5 +1,14 @@
 <resources>
-    <string name="app_name">TheAudioDBApp</string>
-    <string name="rankings">Classements</string>
-    <string name="search">Recherche</string>
+    <string name="app_name" translatable="false">TheAudioDBApp</string>
+    <string name="rankings">Rankings</string>
+    <string name="search_cta">Search</string>
+    <string name="artists">Artists</string>
+    <string name="albums">Albums</string>
+    <string name="no_result_for_query">No result matches your query</string>
+    <string name="search">Search</string>
+    <string name="most_popular_tracks">Most popular tracks</string>
+    <string name="cta_search">Look for something</string>
+    <string name="tracks">Tracks</string>
+    <string name="lyrics">Lyrics</string>
+    <string name="votes">%s votes</string>
 </resources>
