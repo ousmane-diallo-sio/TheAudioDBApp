@@ -8,12 +8,12 @@ import android.widget.Adapter
 import android.widget.TableLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.theaudiodbapp.databinding.RankingFragmentBinding
+import com.example.theaudiodbapp.databinding.HomeRankingFragmentBinding
 import com.google.android.material.tabs.TabLayout
 
 class RankingFragment : Fragment() {
 
-    private var _binding: RankingFragmentBinding? = null
+    private var _binding: HomeRankingFragmentBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -21,7 +21,7 @@ class RankingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = RankingFragmentBinding.inflate(inflater, container, false)
+        _binding = HomeRankingFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 

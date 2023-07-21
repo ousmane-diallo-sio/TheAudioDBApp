@@ -9,14 +9,13 @@ import com.example.theaudiodbapp.R
 
 
 
-class TracksFragment : Fragment() {
+class HomeTracksFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_titres, container, false)
+        return inflater.inflate(R.layout.home_tracks_fragment, container, false)
     }
 
 

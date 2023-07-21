@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.home.search.SearchFragment">
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStartSearchFragment"
@@ -22,7 +21,6 @@
         app:layout_constraintGuide_end="15dp" />
 
     <LinearLayout
-        android:id="@+id/llSearchSearchFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="@id/guidelineStartSearchFragment"
@@ -35,7 +33,7 @@
             style="@style/tvPageTitleTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/classement" />
+            android:text="@string/rankings" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tablayout"
@@ -61,7 +59,7 @@
 
         <fragment
             android:id="@+id/fragment_ranking_tabitem"
-            android:name="com.example.theaudiodbapp.ui.home.ranking.AlbumsFragment"
+            android:name="com.example.theaudiodbapp.ui.home.ranking.HomeAlbumsFragment"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="0dp"/>

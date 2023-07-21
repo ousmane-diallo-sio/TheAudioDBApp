@@ -9,7 +9,7 @@
         android:id="@+id/rankingFragment"
         android:name="com.example.theaudiodbapp.ui.home.ranking.RankingFragment"
         android:label="RankingFragment"
-        tools:layout="@layout/ranking_fragment">
+        tools:layout="@layout/home_ranking_fragment">
         <action
             android:id="@+id/action_rankingFragment_to_albumFragment"
             app:destination="@id/albumFragment" />
