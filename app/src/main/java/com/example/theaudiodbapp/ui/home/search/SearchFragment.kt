@@ -23,6 +23,7 @@ import com.example.theaudiodbapp.databinding.SearchFragmentBinding
 import com.example.theaudiodbapp.components.recyclerview.SearchAdapter
 import com.example.theaudiodbapp.ui.details.artist.ArtistFragmentArgs
 import com.example.theaudiodbapp.utils.Helpers
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -53,6 +54,9 @@ class SearchFragment : Fragment() {
         val lytSearchArtistsPlaceholder = view.findViewById<View>(R.id.lytSearchSearchFragment)
 
         val navController = findNavController()
+
+        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.nav_view)
+        bottomNavigationView?.visibility = View.VISIBLE
 
         val searchAdapter = SearchAdapter(
             mutableListOf(),
