@@ -50,21 +50,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-
-
-
-
-
         </com.google.android.material.tabs.TabLayout>
 
         <fragment
             android:id="@+id/fragment_ranking_tabitem"
-            android:name="com.example.theaudiodbapp.ui.home.ranking.HomeAlbumsFragment"
+            android:name="com.example.theaudiodbapp.ui.home.ranking.HomeTracksFragment"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="0dp"/>
-
-
 
     </LinearLayout>
 
