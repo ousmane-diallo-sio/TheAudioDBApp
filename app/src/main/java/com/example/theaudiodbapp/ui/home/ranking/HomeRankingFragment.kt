@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.TableLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import com.example.theaudiodbapp.R
 import com.example.theaudiodbapp.databinding.HomeRankingFragmentBinding
 import com.google.android.material.tabs.TabLayout
 
@@ -26,10 +25,27 @@ class RankingFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+        val fragmentManager = activity?.supportFragmentManager
+
+        val homeTracksFragment = HomeTracksFragment()
+        val homeAlbumsFragment = HomeAlbumsFragment()
+        var tabLayoutChange = false
+
         val tabLayout = binding.tablayout
         tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
-
+                fragmentManager?.beginTransaction()
+                fragmentManager?.popBackStack()
+                fragmentManager?.commit {
+                    if (tabLayoutChange) {
+                        replace(R.id.fragment_ranking_tabitem, homeTracksFragment)
+                    } else {
+                        replace(R.id.fragment_ranking_tabitem, homeAlbumsFragment)
+                    }
+                    tabLayoutChange = !tabLayoutChange
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
