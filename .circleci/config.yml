@@ -4,7 +4,7 @@ orbs:
   android: circleci/android@2.3.0
 
 jobs:
-  build-test-and-upload:
+  build-test-and-upload: # name of the job
     executor:
       name: android/android-machine
       resource-class: large
@@ -39,10 +39,11 @@ jobs:
             curl -Ls https://github.com/testappio/cli/releases/latest/download/install | bash
             $INSTALL_DIR/ta-cli publish --api_token=cf23fb79-335c-4b3c-b217-1bfd40507c69 --app_id=jgo9jgNE7d --release="android" --apk=./app/build/outputs/apk/debug/app-debug.apk --release_notes=$release_notes --notify=$notify --git_release_notes=$git_release_notes --git_commit_id=$git_commit_id --source="Circle CI"
 
-workflows:
+
+workflows: # a collection of scheduled jobs
   testappio-release:
     jobs:
-      - build-and-upload:
+      - build-test-and-upload:
           filters:
             branches:
               only:
