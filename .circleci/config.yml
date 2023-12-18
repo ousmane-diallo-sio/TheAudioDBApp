@@ -26,6 +26,9 @@ jobs:
       - run:
           name: Assemble debug build
           command: ./gradlew assembleDebug
+      #- run:
+          #name: Run Unit tests
+          #command: ./gradlew test
       - run:
           name: Upload to TestApp.io
           command: |
