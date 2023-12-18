@@ -2,7 +2,7 @@
 
 buildscript { ext {}
     dependencies {
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.0.0"
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.4.1")
     }
 }
 
