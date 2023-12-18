@@ -4,7 +4,7 @@ orbs:
   android: circleci/android@2.3.0
 
 jobs:
-  build-and-upload:
+  build-test-and-upload:
     executor:
       name: android/android-machine
       resource-class: large
@@ -30,22 +30,15 @@ jobs:
           name: Run Unit tests
           command: ./gradlew test
       - run:
+          - android/start-emulator-and-run-tests:
+                test-command: ./gradlew connectedDebugAndroidTest
+                system-image: system-images;android-30;google_apis;x86
+      - run:
           name: Upload to TestApp.io
           command: |
             export INSTALL_DIR=/tmp
             curl -Ls https://github.com/testappio/cli/releases/latest/download/install | bash
             $INSTALL_DIR/ta-cli publish --api_token=cf23fb79-335c-4b3c-b217-1bfd40507c69 --app_id=jgo9jgNE7d --release="android" --apk=./app/build/outputs/apk/debug/app-debug.apk --release_notes=$release_notes --notify=$notify --git_release_notes=$git_release_notes --git_commit_id=$git_commit_id --source="Circle CI"
-
-
-
-  build-and-ui-test:
-    executor:
-      name: android/android-machine
-    steps:
-      - run:
-          - android/start-emulator-and-run-tests:
-              test-command: ./gradlew connectedDebugAndroidTest
-              system-image: system-images;android-30;google_apis;x86
 
 workflows:
   testappio-release:
