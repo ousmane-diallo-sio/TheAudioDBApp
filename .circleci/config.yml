@@ -15,13 +15,15 @@ jobs:
     steps:
       - checkout # check out the code in the working directory
       - run:
-          name: Assemble debug build
+          name: Install JDK 17
           command: |
             sudo apt-get update && sudo apt-get install openjdk-17-jdk
             sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
             sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
             java -version
-            ./gradlew assembleDebug
+      - run:
+          name: Assemble debug build
+          command: ./gradlew assembleDebug
 
 workflows:
   testappio-release:
