@@ -24,6 +24,13 @@ jobs:
       - run:
           name: Assemble debug build
           command: ./gradlew assembleDebug
+      - run:
+          name: Upload to TestApp.io
+          command: |
+            export INSTALL_DIR=/tmp
+            curl -Ls https://github.com/testappio/cli/releases/latest/download/install | bash
+            $INSTALL_DIR/ta-cli publish --api_token=$TESTAPPIO_API_TOKEN --app_id=$TESTAPPIO_APP_ID --release="android" --apk=./app/build/outputs/apk/debug/app-debug.apk --release_notes=$release_notes --notify=$notify --git_release_notes=$git_release_notes --git_commit_id=$git_commit_id --source="Circle CI"
+
 
 workflows:
   testappio-release:
