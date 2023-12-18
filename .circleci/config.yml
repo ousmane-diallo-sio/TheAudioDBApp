@@ -30,7 +30,7 @@ jobs:
           name: Run Unit tests
           command: ./gradlew test
       - run:
-          - android/start-emulator-and-run-tests:
+        - android/start-emulator-and-run-tests:
             test-command: ./gradlew connectedDebugAndroidTest
             system-image: system-images;android-30;google_apis;x86
       - run:
