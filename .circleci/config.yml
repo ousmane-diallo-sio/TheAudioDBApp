@@ -19,9 +19,4 @@ jobs:
 workflows:
   testappio-release:
     jobs:
-      -build-and-upload:
-          filters:
-            branches:
-              only:
-                - main
-                - build/circleci
+      -build-and-upload
