@@ -12,6 +12,8 @@ jobs:
     environment:
       release_notes: "Release notes for this build"
       notify: true
+      git_release_notes: false
+      git_commit_id: false
     steps:
       - checkout # check out the code in the working directory
       - run:
