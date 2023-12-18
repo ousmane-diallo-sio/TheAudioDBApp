@@ -31,8 +31,8 @@ jobs:
           command: ./gradlew test
       - run:
           - android/start-emulator-and-run-tests:
-                test-command: ./gradlew connectedDebugAndroidTest
-                system-image: system-images;android-30;google_apis;x86
+            test-command: ./gradlew connectedDebugAndroidTest
+            system-image: system-images;android-30;google_apis;x86
       - run:
           name: Upload to TestApp.io
           command: |
