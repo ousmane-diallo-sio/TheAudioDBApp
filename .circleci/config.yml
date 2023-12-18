@@ -17,3 +17,11 @@ jobs:
           command: ./gradlew assembleDebug
 
 workflows:
+  testappio-release:
+    jobs:
+      -build-and-upload:
+          filters:
+            branches:
+              only:
+                - main
+                - build/circleci
