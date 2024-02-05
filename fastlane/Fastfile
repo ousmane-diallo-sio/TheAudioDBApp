@@ -16,10 +16,6 @@
 default_platform(:android)
 
 platform :android do
-    desc "Runs all the tests"
-    lane :test do
-        gradle(task: "test")
-    end
 
     desc "Run sample test functions tests"
     lane :sample_test_functions do
@@ -34,6 +30,13 @@ platform :android do
     desc "Run HomeFragment ui tests"
     lane :ui_tests_home_fragment do
         gradle(task: "app:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.example.theaudiodbapp.ui.home.HomeFragmentTest")
+    end
+
+    desc "Run continuous integration processes"
+    lane :ci_processes do
+        sample_test_functions
+        ui_tests_main_activity
+        ui_tests_home_fragment
     end
 
 end
