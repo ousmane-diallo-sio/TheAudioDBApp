@@ -36,9 +36,4 @@ platform :android do
         gradle(task: "app:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.example.theaudiodbapp.ui.home.HomeFragmentTest")
     end
 
-    #desc "Build and deploy to TestApp.io"
-    #lane :deploy_to_testapp do
-    #    gradle(task: "clean assembleDebug")
-    #    # Upload to TestApp.io
-    #end
 end

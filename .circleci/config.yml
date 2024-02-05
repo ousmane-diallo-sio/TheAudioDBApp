@@ -27,11 +27,14 @@ jobs:
           name: Assemble debug build
           command: ./gradlew assembleDebug
       - run:
-          name: Run Unit tests
-          command: ./gradlew test
-      - android/start-emulator-and-run-tests:
-          test-command: ./gradlew connectedDebugAndroidTest
-          system-image: system-images;android-30;google_apis;x86
+          name: Run fastlane - Sample test functions
+          command: bundle exec fastlane sample_test_functions
+      - run:
+          name: Run fastlane - MainActivity ui tests
+          command: bundle exec fastlane ui_tests_main_activity
+      - run:
+          name: Run fastlane - HomeFragments ui tests
+          command: bundle exec fastlane ui_tests_home_fragment
       - run:
           name: Upload to TestApp.io
           command: |
