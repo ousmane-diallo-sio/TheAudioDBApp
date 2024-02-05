@@ -27,6 +27,9 @@ jobs:
           name: Assemble debug build
           command: ./gradlew assembleDebug
       - run:
+          name: Install Fastlane dependencies
+          command: bundle install
+      - run:
           name: Run fastlane - Sample test functions
           command: bundle exec fastlane sample_test_functions
       - run:
@@ -35,6 +38,9 @@ jobs:
       - run:
           name: Run fastlane - HomeFragments ui tests
           command: bundle exec fastlane ui_tests_home_fragment
+      - run:
+          name: Run fastlane - Increment version code
+          command: fastlane run increment_version_code
       - run:
           name: Upload to TestApp.io
           command: |
