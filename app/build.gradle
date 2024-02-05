@@ -14,7 +14,7 @@ android {
         applicationId "com.example.theaudiodbapp"
         minSdk 21
         targetSdk 33
-        versionCode 3
+        versionCode 4
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -57,4 +57,16 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.2.1'
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation 'com.github.bumptech.glide:glide:4.15.1'
+}
+
+tasks.register('startEmulator', Exec) {
+    def avdNames = 'emulator -list-avds'.execute().text.trim().split('\n')
+    def selectedAVD = avdNames.first()
+    commandLine 'emulator', '-avd', selectedAVD
+}
+
+tasks.configureEach { task ->
+    if (task.name.startsWith('connected')) {
+        task.dependsOn 'startEmulator'
+    }
 }
