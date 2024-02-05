@@ -26,6 +26,14 @@ jobs:
       - run:
           name: Assemble debug build
           command: ./gradlew assembleDebug
+      - android/create-avd:
+          avd-name: exampleavd
+          install: true
+          system-image: system-images;android-29;default;x86
+      - android/start-emulator:
+          avd-name: exampleavd
+          no-window: true
+          restore-gradle-cache-prefix: v1a
       - run:
           name: Install Fastlane dependencies
           command: bundle install
