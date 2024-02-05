@@ -51,4 +51,4 @@ workflows: # a collection of scheduled jobs
             branches:
               only:
                 - main
-                - build/circleci
+                - dev
