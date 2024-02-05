@@ -45,7 +45,7 @@ jobs:
           command: |
             export INSTALL_DIR=/tmp
             curl -Ls https://github.com/testappio/cli/releases/latest/download/install | bash
-            $INSTALL_DIR/ta-cli publish --api_token=cf23fb79-335c-4b3c-b217-1bfd40507c69 --app_id=jgo9jgNE7d --release="android" --apk=./app/build/outputs/apk/debug/app-debug.apk --release_notes=$release_notes --notify=$notify --git_release_notes=$git_release_notes --git_commit_id=$git_commit_id --source="Circle CI"
+            $INSTALL_DIR/ta-cli publish --api_token=cf23fb79-335c-4b3c-b217-1bfd40507c69 --app_id=OaYVJW7Ymr --release="android" --apk=./app/build/outputs/apk/debug/app-debug.apk --release_notes=$release_notes --notify=$notify --git_release_notes=$git_release_notes --git_commit_id=$git_commit_id --source="Circle CI"
 
 
 workflows: # a collection of scheduled jobs
