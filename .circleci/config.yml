@@ -39,9 +39,6 @@ jobs:
           name: Run fastlane - HomeFragments ui tests
           command: bundle exec fastlane ui_tests_home_fragment
       - run:
-          name: Run fastlane - Increment version code
-          command: fastlane run increment_version_code
-      - run:
           name: Upload to TestApp.io
           command: |
             export INSTALL_DIR=/tmp
