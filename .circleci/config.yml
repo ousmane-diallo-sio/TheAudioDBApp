@@ -4,16 +4,56 @@ orbs:
   android: circleci/android@2.3.0
 
 jobs:
-  build-and-upload:
+  build-test-and-upload: # name of the job
     executor:
       name: android/android-machine
+      resource-class: large
+      tag: 2021.10.1
     environment:
       release_notes: "Release notes for this build"
-      notify: true
+      notify: "true"
+      git_release_notes: "false"
+      git_commit_id: "false"
     steps:
       - checkout # check out the code in the working directory
       - run:
+          name: Install JDK 17
+          command: |
+            sudo apt-get update && sudo apt-get install openjdk-17-jdk
+            sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+            sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
+            java -version
+      - run:
           name: Assemble debug build
           command: ./gradlew assembleDebug
+      - android/create-avd:
+          avd-name: exampleavd
+          install: true
+          system-image: system-images;android-29;default;x86
+      - android/start-emulator:
+          avd-name: exampleavd
+          no-window: true
+          restore-gradle-cache-prefix: v1a
+      - run:
+          name: Install Fastlane dependencies
+          command: bundle install
+      - run:
+          name: Run fastlane ui tests
+          command: bundle exec fastlane ci_processes
+      - run:
+          name: Upload to TestApp.io
+          command: |
+            export INSTALL_DIR=/tmp
+            curl -Ls https://github.com/testappio/cli/releases/latest/download/install | bash
+            $INSTALL_DIR/ta-cli publish --api_token=$API_TOKEN --app_id=$APP_ID --release="android" --apk=./app/build/outputs/apk/debug/app-debug.apk --release_notes=$release_notes --notify=$notify --git_release_notes=$git_release_notes --git_commit_id=$git_commit_id --source="Circle CI"
 
-workflows:
+
+workflows: # a collection of scheduled jobs
+  testappio-release:
+    jobs:
+      - build-test-and-upload:
+          filters:
+            branches:
+              only:
+                - main
+                - dev

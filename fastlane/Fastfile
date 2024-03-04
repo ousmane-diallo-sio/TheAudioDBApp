@@ -1,0 +1,42 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+
+    desc "Run sample test functions tests"
+    lane :sample_test_functions do
+        gradle(task: "app:testDebugUnitTest --tests com.example.theaudiodbapp.utils.SampleTestFunctionsKtTest")
+    end
+
+    desc "Run MainActivity ui tests"
+    lane :ui_tests_main_activity do
+        gradle(task: "app:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.example.theaudiodbapp.MainActivityTest")
+    end
+
+    desc "Run HomeFragment ui tests"
+    lane :ui_tests_home_fragment do
+        gradle(task: "app:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.example.theaudiodbapp.ui.home.HomeFragmentTest")
+    end
+
+    desc "Run continuous integration processes"
+    lane :ci_processes do
+        sample_test_functions
+        ui_tests_main_activity
+        ui_tests_home_fragment
+    end
+
+end
