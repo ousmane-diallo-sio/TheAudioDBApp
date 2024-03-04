@@ -21,6 +21,27 @@ platform :android do
         setup_circle_ci
     end
 
+    lane :test do
+        increment_version_code(
+            gradle_file_path: "project/build.gradle",
+        )
+    end
+
+    desc "Build debug and test APK for screenshots"
+        lane :build_for_screengrab do
+        gradle(
+          task: 'clean'
+        )
+        build_android_app(
+          task: 'assemble',
+          build_type: 'Debug'
+        )
+        build_android_app(
+          task: 'assemble',
+          build_type: 'AndroidTest'
+        )
+    end
+
     desc "Run sample test functions tests"
     lane :sample_test_functions do
         gradle(task: "app:testDebugUnitTest --tests com.example.theaudiodbapp.utils.SampleTestFunctionsKtTest")
@@ -43,6 +64,12 @@ platform :android do
         ui_tests_home_fragment
     end
 
+    desc "Generate  screenshots"
+    lane :screenshots do
+        build
+        capture_android_screenshots
+    end
+
     desc "Discord Integration"
     lane :discord_notifier do
       discord_notifier(
@@ -53,20 +80,6 @@ platform :android do
         thumbnail_url:"https://cdn.discordapp.com/embed/avatars/0.png",
         image_url:"https://cdn.discordapp.com/embed/avatars/0.png",
         fields:[
-          {
-            name:"Field1",
-            value:"Value1"
-          },
-          {
-            name:"Field2",
-            value:"Value2",
-            inline: true
-          },
-          {
-            name:"Field3",
-            value:"Value3",
-            inline: true
-          }
         ]
       )
     end
