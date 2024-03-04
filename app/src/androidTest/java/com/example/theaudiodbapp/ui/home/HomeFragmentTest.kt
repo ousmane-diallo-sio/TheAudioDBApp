@@ -31,13 +31,8 @@ class HomeFragmentTest {
 
     @Test
     fun testTakeScreenshot() {
-        Screengrab.screenshot("before_search_bar_click")
+        Screengrab.screenshot("screenshot")
         onView(withId(R.id.ciSearchSearchFragment)).perform(ViewActions.click())
-        Screengrab.screenshot("after_search_bar_click")
-        onView(withId(R.id.ciSearchSearchFragment)).perform(ViewActions.typeText("PNL"))
-        Screengrab.screenshot("after_search")
-        onView(withId(R.id.rvArtistsSearchFragment)).perform(ViewActions.click())
-        Screengrab.screenshot("after_click_on_artist")
     }
 
 }
