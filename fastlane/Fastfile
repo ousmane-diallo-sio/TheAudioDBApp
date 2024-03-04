@@ -17,6 +17,10 @@ default_platform(:android)
 
 platform :android do
 
+    before_all do
+        setup_circle_ci
+    end
+
     desc "Run sample test functions tests"
     lane :sample_test_functions do
         gradle(task: "app:testDebugUnitTest --tests com.example.theaudiodbapp.utils.SampleTestFunctionsKtTest")
