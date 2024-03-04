@@ -18,11 +18,4 @@ class MainActivityTest {
         onView(withId(R.id.cl_root_main)).check(matches(isDisplayed()))
     }
 
-    @Test
-    fun testTakeScreenshot() {
-        Screengrab.screenshot("main_activity_screenshot")
-        //Screengrab.screenshot("before_button_click")
-        //onView(withId(android.R.id.home)).perform(ViewActions.click())
-        //Screengrab.screenshot("after_button_click")
-    }
 }
