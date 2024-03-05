@@ -58,33 +58,15 @@ platform :android do
     end
 
     desc "Run continuous integration processes"
-        lane :ci_processes do
-            say("Voulez-vous vraiment exécuter les processus d'intégration continue ?")
-            if prompt(text: "Voulez-vous vraiment exécuter les processus d'intégration continue ? (y/n)", ci_input: 'y') == 'y'
-                sample_test_functions
-                ui_tests_main_activity
-                ui_tests_home_fragment
-            else
-                say("Processus d'intégration continue annulés.")
-                puts "Processus d'intégration continue annulés."
-            end
-        end
+    lane :ci_processes do
+        sample_test_functions
+        ui_tests_main_activity
+        ui_tests_home_fragment
+    end
+
     desc "Generate  screenshots"
     lane :screenshots do
         build
         capture_android_screenshots
     end
-
-    desc "Discord Integration"
-    lane :discord_notifier do
-      discord_notifier(
-        webhook_url: ENV["DISCORD_KEY"],
-        title: "Discord Notification",
-        description: "Circle CI Success",
-        thumbnail_url:"https://cdn.discordapp.com/embed/avatars/0.png",
-        image_url:"https://cdn.discordapp.com/embed/avatars/0.png",
-      )
-    end
-
-
 end
