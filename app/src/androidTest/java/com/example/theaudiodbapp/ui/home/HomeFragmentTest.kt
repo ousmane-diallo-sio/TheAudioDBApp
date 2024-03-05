@@ -16,23 +16,23 @@ import tools.fastlane.screengrab.Screengrab
 
 class HomeFragmentTest {
 
-    @get: Rule
-    val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
     fun test_isHomeFragmentDisplayed() {
+        val activityRule = ActivityScenarioRule(MainActivity::class.java)
         onView(withId(R.id.nav_host_fragment_home_fragment)).check(matches(isDisplayed()))
     }
 
     @Test
     fun test_BottomNavigationWorking() {
+        val activityRule = ActivityScenarioRule(MainActivity::class.java)
         onView(withId(R.id.nav_view)).check(matches(isDisplayed()))
     }
 
     @Test
     fun testTakeScreenshot() {
+        val activityRule = ActivityScenarioRule(MainActivity::class.java)
         Screengrab.screenshot("screenshot")
         onView(withId(R.id.ciSearchSearchFragment)).perform(ViewActions.click())
     }
-
 }
