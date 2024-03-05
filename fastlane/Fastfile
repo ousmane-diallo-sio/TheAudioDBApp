@@ -76,25 +76,8 @@ platform :android do
         webhook_url: ENV["DISCORD_KEY"],
         title: "Discord Notification",
         description: "Circle CI Success",
-        success: true,
         thumbnail_url:"https://cdn.discordapp.com/embed/avatars/0.png",
         image_url:"https://cdn.discordapp.com/embed/avatars/0.png",
-        fields:[
-          {
-            name:"Field1",
-            value:"Value1"
-          },
-          {
-            name:"Field2",
-            value:"Value2",
-            inline: true
-          },
-          {
-            name:"Field3",
-            value:"Value3",
-            inline: true
-          }
-        ]
       )
     end
 
